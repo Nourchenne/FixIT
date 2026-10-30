@@ -66,3 +66,11 @@ Desktop.ini
 *.tmp
 *.swp
 *~
+
+# Contenu documentaire généré
+data/processed/
+
+# Base vectorielle locale et configuration générée
+data/vectorstore/
+data/processed/vector_index.json
+data/processed/*.tmp
