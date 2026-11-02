@@ -7,6 +7,8 @@ from qdrant_client import QdrantClient
 from documents.services.embeddings import embed_query
 from documents.services.indexing import EMBEDDING_CONFIG
 
+from config.qdrant import QDRANT_URL
+
 
 BASE_DIR = Path(__file__).resolve().parents[2]
 INDEX_INFO_FILE = BASE_DIR / "data" / "processed" / "vector_index.json"
@@ -43,14 +45,8 @@ def search_documents(question, limit=3):
 
     information = load_index_info()
     collection_name = information["collection_name"]
-    qdrant_path = BASE_DIR / information["qdrant_path"]
-
-    if not qdrant_path.is_dir():
-        raise FileNotFoundError(
-            f"Base Qdrant introuvable : {qdrant_path}"
-        )
-
-    client = QdrantClient(path=str(qdrant_path))
+    
+    client = QdrantClient(url=QDRANT_URL)
 
     try:
         if not client.collection_exists(collection_name):

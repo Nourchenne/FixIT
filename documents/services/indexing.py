@@ -9,12 +9,11 @@ from documents.services.embeddings import (
     MODEL_NAME,
     embed_documents,
 )
-
+from config.qdrant import QDRANT_URL
 
 BASE_DIR = Path(__file__).resolve().parents[2]
 
 CHUNKS_FILE = BASE_DIR / "data" / "processed" / "chunks.jsonl"
-QDRANT_PATH = BASE_DIR / "data" / "vectorstore" / "qdrant"
 INDEX_INFO_FILE = BASE_DIR / "data" / "processed" / "vector_index.json"
 
 VECTOR_SIZE = 384
@@ -114,7 +113,7 @@ def save_index_info(collection_name, count):
     """Enregistrer les informations nécessaires à la recherche."""
     information = {
         "collection_name": collection_name,
-        "qdrant_path": QDRANT_PATH.relative_to(BASE_DIR).as_posix(),
+        "qdrant_url": QDRANT_URL,
         "chunks_file": CHUNKS_FILE.relative_to(BASE_DIR).as_posix(),
         "chunk_count": count,
         "embedding_config": EMBEDDING_CONFIG,
@@ -138,10 +137,9 @@ def main():
     chunks, file_content = load_chunks()
     collection_name = get_collection_name(file_content)
 
-    QDRANT_PATH.mkdir(parents=True, exist_ok=True)
+    
 
-    # Ouvrir une base Qdrant persistante sur le disque.
-    client = QdrantClient(path=str(QDRANT_PATH))
+    client = QdrantClient(url=QDRANT_URL)
 
     try:
         # Créer la collection uniquement si elle n'existe pas.
@@ -222,7 +220,7 @@ def main():
         print(f"Chunks enregistrés : {stored_count}")
         print(f"Dimension des vecteurs : {VECTOR_SIZE}")
         print(f"Collection : {collection_name}")
-        print(f"Base locale : {QDRANT_PATH}")
+        print(f"Base locale : {QDRANT_URL}")
         print(f"Configuration : {INDEX_INFO_FILE}")
 
     finally:
