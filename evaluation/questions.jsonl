@@ -1,0 +1,38 @@
+{"query_id": "Q001", "lang": "fr", "cas": "NET01", "question": "Mon ordinateur ne trouve aucun réseau Wi-Fi.", "gold_doc_ids": ["DOC001", "DOC003"], "answerable": true}
+{"query_id": "Q002", "lang": "en", "cas": "NET01", "question": "My computer cannot find any Wi-Fi networks.", "gold_doc_ids": ["DOC001", "DOC003"], "answerable": true}
+{"query_id": "Q003", "lang": "fr", "cas": "NET01", "question": "Aucun réseau sans fil n'apparaît dans la liste, comment faire ?", "gold_doc_ids": ["DOC001", "DOC003"], "answerable": true}
+{"query_id": "Q004", "lang": "fr", "cas": "NET02", "question": "Je n'arrive pas à me connecter à mon réseau Wi-Fi alors que je vois le réseau.", "gold_doc_ids": ["DOC001", "DOC002", "DOC003"], "answerable": true}
+{"query_id": "Q005", "lang": "en", "cas": "NET02", "question": "I keep getting a wrong password error when connecting to my Wi-Fi network.", "gold_doc_ids": ["DOC001", "DOC002", "DOC003"], "answerable": true}
+{"query_id": "Q006", "lang": "fr", "cas": "NET03", "question": "Ma connexion Wi-Fi se coupe sans arrêt, que vérifier ?", "gold_doc_ids": ["DOC001", "DOC003"], "answerable": true}
+{"query_id": "Q007", "lang": "en", "cas": "NET03", "question": "My laptop keeps disconnecting from Wi-Fi every few minutes.", "gold_doc_ids": ["DOC001", "DOC003"], "answerable": true}
+{"query_id": "Q008", "lang": "fr", "cas": "NET04", "question": "Je suis connecté au Wi-Fi mais je n'ai pas accès à Internet.", "gold_doc_ids": ["DOC001", "DOC003"], "answerable": true}
+{"query_id": "Q009", "lang": "en", "cas": "NET04", "question": "My PC is connected to Wi-Fi but has no internet access.", "gold_doc_ids": ["DOC001", "DOC003"], "answerable": true}
+{"query_id": "Q010", "lang": "fr", "cas": "PC01", "question": "Mon PC est très lent depuis quelques jours, comment l'accélérer ?", "gold_doc_ids": ["DOC004", "DOC005", "DOC036"], "answerable": true}
+{"query_id": "Q011", "lang": "en", "cas": "PC01", "question": "How can I improve the performance of my slow Windows PC?", "gold_doc_ids": ["DOC004", "DOC005", "DOC036"], "answerable": true}
+{"query_id": "Q012", "lang": "fr", "cas": "PC01", "question": "Trop d'applications se lancent au démarrage et ralentissent Windows.", "gold_doc_ids": ["DOC005", "DOC004"], "answerable": true}
+{"query_id": "Q013", "lang": "fr", "cas": "PC02", "question": "Une application ne répond plus et reste bloquée, comment la fermer ?", "gold_doc_ids": ["DOC029", "DOC006"], "answerable": true}
+{"query_id": "Q014", "lang": "en", "cas": "PC02", "question": "An app keeps crashing on Windows, how do I repair it?", "gold_doc_ids": ["DOC006", "DOC007"], "answerable": true}
+{"query_id": "Q015", "lang": "fr", "cas": "PC02", "question": "Une application du Microsoft Store ne s'ouvre pas.", "gold_doc_ids": ["DOC007", "DOC006"], "answerable": true}
+{"query_id": "Q016", "lang": "fr", "cas": "PC03", "question": "Je n'ai plus d'espace disque sur mon PC, comment en libérer ?", "gold_doc_ids": ["DOC008", "DOC009"], "answerable": true}
+{"query_id": "Q017", "lang": "en", "cas": "PC03", "question": "My C drive is almost full, how do I free up disk space on Windows?", "gold_doc_ids": ["DOC008", "DOC009"], "answerable": true}
+{"query_id": "Q018", "lang": "fr", "cas": "PER01", "question": "Je n'ai plus aucun son sur mon ordinateur.", "gold_doc_ids": ["DOC010", "DOC012", "DOC020"], "answerable": true}
+{"query_id": "Q019", "lang": "en", "cas": "PER01", "question": "There is no sound coming from my Windows laptop speakers.", "gold_doc_ids": ["DOC010", "DOC012", "DOC020"], "answerable": true}
+{"query_id": "Q020", "lang": "fr", "cas": "PER01", "question": "Mon périphérique de sortie audio n'est pas détecté.", "gold_doc_ids": ["DOC020", "DOC010"], "answerable": true}
+{"query_id": "Q021", "lang": "fr", "cas": "PER02", "question": "Mon microphone ne fonctionne pas pendant les appels.", "gold_doc_ids": ["DOC011"], "answerable": true}
+{"query_id": "Q022", "lang": "en", "cas": "PER02", "question": "My microphone is not working in Windows, nobody can hear me.", "gold_doc_ids": ["DOC011"], "answerable": true}
+{"query_id": "Q023", "lang": "fr", "cas": "PER03", "question": "Mon clavier et ma souris ne sont pas détectés par Windows.", "gold_doc_ids": ["DOC013", "DOC024"], "answerable": true}
+{"query_id": "Q024", "lang": "en", "cas": "PER03", "question": "My wireless mouse is not detected on my Windows PC.", "gold_doc_ids": ["DOC013", "DOC024"], "answerable": true}
+{"query_id": "Q025", "lang": "fr", "cas": "PER03", "question": "Le pavé tactile de mon ordinateur portable ne répond plus.", "gold_doc_ids": ["DOC016", "DOC013"], "answerable": true}
+{"query_id": "Q026", "lang": "fr", "cas": "NET02", "question": "Comment se connecter à un réseau Wi-Fi sous Windows ?", "gold_doc_ids": ["DOC002", "DOC001"], "answerable": true}
+{"query_id": "Q027", "lang": "en", "cas": "NET04", "question": "My Wi-Fi shows connected but websites won't load.", "gold_doc_ids": ["DOC001", "DOC003"], "answerable": true}
+{"query_id": "Q028", "lang": "fr", "cas": "PC01", "question": "Mon ordinateur se fige et rame tout le temps.", "gold_doc_ids": ["DOC036", "DOC004"], "answerable": true}
+{"query_id": "Q029", "lang": "en", "cas": "PC03", "question": "How do I use Storage Sense to manage disk space automatically?", "gold_doc_ids": ["DOC009", "DOC008"], "answerable": true}
+{"query_id": "Q030", "lang": "fr", "cas": "PER01", "question": "Comment mettre à jour mes pilotes audio sous Windows ?", "gold_doc_ids": ["DOC012", "DOC010"], "answerable": true}
+{"query_id": "Q031", "lang": "fr", "cas": "HORS", "question": "Comment remplacer la courroie de distribution de ma voiture ?", "gold_doc_ids": [], "answerable": false}
+{"query_id": "Q032", "lang": "en", "cas": "HORS", "question": "How do I replace the timing belt in my car?", "gold_doc_ids": [], "answerable": false}
+{"query_id": "Q033", "lang": "fr", "cas": "HORS", "question": "Quelle est la meilleure recette de couscous tunisien ?", "gold_doc_ids": [], "answerable": false}
+{"query_id": "Q034", "lang": "en", "cas": "HORS", "question": "What is the capital of Australia?", "gold_doc_ids": [], "answerable": false}
+{"query_id": "Q035", "lang": "fr", "cas": "HORS", "question": "Comment déclarer mes impôts en ligne cette année ?", "gold_doc_ids": [], "answerable": false}
+{"query_id": "Q036", "lang": "en", "cas": "HORS", "question": "Can you recommend a good restaurant near me?", "gold_doc_ids": [], "answerable": false}
+{"query_id": "Q037", "lang": "fr", "cas": "HORS", "question": "Explique-moi la théorie de la relativité restreinte.", "gold_doc_ids": [], "answerable": false}
+{"query_id": "Q038", "lang": "en", "cas": "HORS", "question": "How do I train a convolutional neural network in PyTorch?", "gold_doc_ids": [], "answerable": false}
