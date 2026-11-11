@@ -81,8 +81,11 @@ def top_score(passages):
     return passages[0]["score"] if passages else None
 
 
-def evaluate(questions, limit):
-    """Interroger la recherche pour chaque question et agréger les mesures."""
+def evaluate(questions, limit, retrieve):
+    """Interroger la recherche pour chaque question et agréger les mesures.
+
+    retrieve(question, limit) -> liste de passages ordonnés (dense ou reranké).
+    """
     details = []
     answerable = [q for q in questions if q.get("answerable", True)]
     out_of_corpus = [q for q in questions if not q.get("answerable", True)]
@@ -94,7 +97,7 @@ def evaluate(questions, limit):
     by_cas = defaultdict(lambda: {"n": 0, **{f"recall@{k}": 0.0 for k in K_VALUES}, "mrr@10": 0.0})
 
     for question in answerable:
-        passages = search_documents(question["question"], limit=limit)
+        passages = retrieve(question["question"], limit)
         rank = rank_of_first_relevant(passages, question.get("gold_doc_ids", []))
         reciprocal = 1.0 / rank if rank else 0.0
 
@@ -148,7 +151,7 @@ def evaluate(questions, limit):
     out_scores = []
     out_details = []
     for question in out_of_corpus:
-        passages = search_documents(question["question"], limit=limit)
+        passages = retrieve(question["question"], limit)
         score = top_score(passages)
         if score is not None:
             out_scores.append(float(score))
@@ -179,11 +182,12 @@ def evaluate(questions, limit):
     }
 
 
-def print_report(report, limit, collection_hint=""):
+def print_report(report, limit, collection_hint="", config="dense"):
     s = report["summary"]
     print("\n" + "=" * 64)
     print("BENCHMARK RECHERCHE FixIT")
     print("=" * 64)
+    print(f"Configuration : {config}")
     if collection_hint:
         print(f"Collection : {collection_hint}")
     print(f"limit (passages récupérés par question) : {limit}")
@@ -223,13 +227,13 @@ def print_report(report, limit, collection_hint=""):
         print("\nAucun échec : chaque question répondable a retrouvé un guide attendu.")
 
 
-def save_results(report, limit):
+def save_results(report, limit, config="dense"):
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
     stamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
-    path = RESULTS_DIR / f"retrieval_{stamp}.json"
+    path = RESULTS_DIR / f"retrieval_{config}_{stamp}.json"
     payload = {
         "date_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-        "config": "dense",
+        "config": config,
         "limit": limit,
         **report,
     }
@@ -252,6 +256,14 @@ def main():
         "--questions", type=Path, default=QUESTIONS_FILE,
         help="Chemin du jeu de questions annoté (.jsonl).",
     )
+    parser.add_argument(
+        "--rerank", action="store_true",
+        help="Ajouter un reranking cross-encoder après la recherche dense.",
+    )
+    parser.add_argument(
+        "--candidates", type=int, default=20,
+        help="Candidats récupérés en dense avant reranking. Défaut : 20.",
+    )
     args = parser.parse_args()
 
     if args.limit < max(K_VALUES):
@@ -260,6 +272,21 @@ def main():
 
     questions = load_questions(args.questions)
 
+    # Choix de la fonction de recherche : dense (référence) ou reranké.
+    if args.rerank:
+        from assistant.services.reranking import search_documents_reranked
+        config = "rerank"
+
+        def retrieve(question, limit):
+            return search_documents_reranked(
+                question, limit=limit, candidate_limit=args.candidates
+            )
+    else:
+        config = "dense"
+
+        def retrieve(question, limit):
+            return search_documents(question, limit=limit)
+
     collection_hint = ""
     try:
         from assistant.services.retrieval import load_index_info
@@ -267,9 +294,9 @@ def main():
     except Exception:
         pass
 
-    report = evaluate(questions, limit=args.limit)
-    print_report(report, args.limit, collection_hint)
-    path = save_results(report, args.limit)
+    report = evaluate(questions, limit=args.limit, retrieve=retrieve)
+    print_report(report, args.limit, collection_hint, config)
+    path = save_results(report, args.limit, config)
     print(f"\nRésultats détaillés enregistrés : {path.relative_to(BASE_DIR)}")
 
 
