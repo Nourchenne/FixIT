@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+{% block title %}FixIT — Assistant de dépannage{% endblock %}
+{% block nav_assistant %}active{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="container">
+    <h1>Un problème de PC ou de Wi-Fi ?</h1>
+    <p>
+      Décrivez votre problème à FixIT. L'assistant recherche la procédure adaptée
+      dans sa base documentaire et propose des étapes de dépannage accompagnées de
+      leurs sources. Réponse en français ou en anglais, selon votre question.
+    </p>
+    <div class="scope-badges">
+      <span>PC lent</span>
+      <span>Application bloquée</span>
+      <span>Espace disque</span>
+      <span>Son et microphone</span>
+      <span>Clavier et souris</span>
+      <span>Wi-Fi</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-bottom:1.5rem;">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+        <div class="chat-card">
+          <div class="chat-head">Assistant de dépannage</div>
+          <div class="chat-body">
+            <div id="messages" class="messages"></div>
+            <form id="chat-form" class="chat-input">
+              <input id="question" autocomplete="off" required
+                     placeholder="Exemple : Mon PC ne trouve aucun réseau Wi-Fi.">
+              <button id="send" class="btn-orange" type="submit">Envoyer</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:1rem;">
+  <div class="container">
+    <h2 class="section-title">Domaines <em>couverts</em></h2>
+    <p class="section-lead">La base documentaire porte sur le dépannage des PC Windows 11 et du Wi-Fi.</p>
+    <div class="row g-4">
+      <div class="col-md-3 col-sm-6">
+        <div class="service-card">
+          <div class="icon">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/><path d="M12 1v3M12 20v3M1 12h3M20 12h3"/>
+            </svg>
+          </div>
+          <h3>Performances</h3>
+          <p>PC lent, démarrage long, processeur ou mémoire saturés.</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="service-card">
+          <div class="icon">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18"/><path d="M7 6h.01M9 6h.01"/>
+            </svg>
+          </div>
+          <h3>Applications</h3>
+          <p>Application bloquée, qui plante ou refuse de s'ouvrir.</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="service-card">
+          <div class="icon">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/>
+            </svg>
+          </div>
+          <h3>Périphériques</h3>
+          <p>Son, microphone, clavier, souris ou pavé tactile.</p>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="service-card">
+          <div class="icon">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <path d="M5 12.5a10 10 0 0 1 14 0"/><path d="M8.5 16a5 5 0 0 1 7 0"/><circle cx="12" cy="19" r="1"/>
+            </svg>
+          </div>
+          <h3>Wi-Fi</h3>
+          <p>Réseau introuvable, connexion impossible ou sans accès Internet.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const CSRF = "{{ csrf_token }}";
+  const ASK_URL = "{% url 'assistant:ask' %}";
+  const messages = document.getElementById("messages");
+  const form = document.getElementById("chat-form");
+  const input = document.getElementById("question");
+  const sendBtn = document.getElementById("send");
+
+  function escapeHtml(value) {
+    const node = document.createElement("div");
+    node.textContent = value;
+    return node.innerHTML;
+  }
+
+  function addBubble(innerHtml, who) {
+    const bubble = document.createElement("div");
+    bubble.className = "bubble " + (who === "user" ? "bubble-user" : "bubble-bot");
+    bubble.innerHTML = innerHtml;
+    messages.appendChild(bubble);
+    bubble.scrollIntoView({ behavior: "smooth", block: "end" });
+    return bubble;
+  }
+
+  function renderAnswer(data) {
+    let html = escapeHtml(data.answer).replace(/\n/g, "<br>");
+    if (data.sources && data.sources.length) {
+      html += '<div class="sources">';
+      for (const source of data.sources) {
+        html += "<div>[" + escapeHtml(source.ref) + "] <strong>"
+             + escapeHtml(source.doc_id) + "</strong> — " + escapeHtml(source.titre)
+             + " · page " + escapeHtml(String(source.page))
+             + ' · <a href="' + encodeURI(source.url) + '" target="_blank" rel="noopener">source</a></div>';
+      }
+      html += "</div>";
+    }
+    return html;
+  }
+
+  form.addEventListener("submit", async function (event) {
+    event.preventDefault();
+    const question = input.value.trim();
+    if (!question) { return; }
+
+    addBubble(escapeHtml(question), "user");
+    input.value = "";
+    sendBtn.disabled = true;
+    const pending = addBubble("Recherche de la procédure en cours…", "bot");
+
+    try {
+      const response = await fetch(ASK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "X-CSRFToken": CSRF },
+        body: JSON.stringify({ question: question }),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        pending.className = "bubble bubble-bot bubble-error";
+        pending.textContent = data.error || "Une erreur est survenue.";
+      } else {
+        pending.innerHTML = renderAnswer(data);
+      }
+    } catch (error) {
+      pending.className = "bubble bubble-bot bubble-error";
+      pending.textContent = "Erreur réseau. Veuillez réessayer.";
+    } finally {
+      sendBtn.disabled = false;
+      input.focus();
+    }
+  });
+</script>
+{% endblock %}
