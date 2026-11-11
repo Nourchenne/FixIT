@@ -1,0 +1,2137 @@
+{
+  "date_utc": "2026-11-09T17:02:03+00:00",
+  "config": "dense",
+  "limit": 10,
+  "summary": {
+    "recall@5": 0.9333,
+    "recall@10": 0.9333,
+    "mrr@10": 0.8389,
+    "n_answerable": 30
+  },
+  "by_lang": {
+    "fr": {
+      "n": 18,
+      "recall@5": 0.9444,
+      "recall@10": 0.9444,
+      "mrr@10": 0.8241
+    },
+    "en": {
+      "n": 12,
+      "recall@5": 0.9167,
+      "recall@10": 0.9167,
+      "mrr@10": 0.8611
+    }
+  },
+  "by_cas": {
+    "NET01": {
+      "n": 3,
+      "recall@5": 1.0,
+      "recall@10": 1.0,
+      "mrr@10": 1.0
+    },
+    "NET02": {
+      "n": 3,
+      "recall@5": 1.0,
+      "recall@10": 1.0,
+      "mrr@10": 0.8333
+    },
+    "NET03": {
+      "n": 2,
+      "recall@5": 1.0,
+      "recall@10": 1.0,
+      "mrr@10": 1.0
+    },
+    "NET04": {
+      "n": 3,
+      "recall@5": 1.0,
+      "recall@10": 1.0,
+      "mrr@10": 0.8333
+    },
+    "PC01": {
+      "n": 4,
+      "recall@5": 0.75,
+      "recall@10": 0.75,
+      "mrr@10": 0.5833
+    },
+    "PC02": {
+      "n": 3,
+      "recall@5": 1.0,
+      "recall@10": 1.0,
+      "mrr@10": 1.0
+    },
+    "PC03": {
+      "n": 3,
+      "recall@5": 1.0,
+      "recall@10": 1.0,
+      "mrr@10": 0.7778
+    },
+    "PER01": {
+      "n": 4,
+      "recall@5": 1.0,
+      "recall@10": 1.0,
+      "mrr@10": 1.0
+    },
+    "PER02": {
+      "n": 2,
+      "recall@5": 1.0,
+      "recall@10": 1.0,
+      "mrr@10": 0.75
+    },
+    "PER03": {
+      "n": 3,
+      "recall@5": 0.6667,
+      "recall@10": 0.6667,
+      "mrr@10": 0.6667
+    }
+  },
+  "hors_corpus": {
+    "n": 8,
+    "top_score_moyen": 0.7976,
+    "top_score_max": 0.8421,
+    "rappel_top_score_moyen_repondables": 0.8705
+  },
+  "details": [
+    {
+      "query_id": "Q001",
+      "lang": "fr",
+      "cas": "NET01",
+      "question": "Mon ordinateur ne trouve aucun réseau Wi-Fi.",
+      "gold_doc_ids": [
+        "DOC001",
+        "DOC003"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC001",
+          "page": 8,
+          "score": 0.8797
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 7,
+          "score": 0.8779
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.874
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.8717
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 1,
+          "score": 0.8688
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 6,
+          "score": 0.8677
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 2,
+          "score": 0.8656
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 4,
+          "score": 0.865
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 3,
+          "score": 0.8609
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 4,
+          "score": 0.8599
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "Q002",
+      "lang": "en",
+      "cas": "NET01",
+      "question": "My computer cannot find any Wi-Fi networks.",
+      "gold_doc_ids": [
+        "DOC001",
+        "DOC003"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.8639
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 7,
+          "score": 0.8624
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.8516
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 8,
+          "score": 0.8499
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 6,
+          "score": 0.8449
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 2,
+          "score": 0.8438
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 1,
+          "score": 0.8402
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 4,
+          "score": 0.8399
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 1,
+          "score": 0.8398
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 4,
+          "score": 0.8377
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "Q003",
+      "lang": "fr",
+      "cas": "NET01",
+      "question": "Aucun réseau sans fil n'apparaît dans la liste, comment faire ?",
+      "gold_doc_ids": [
+        "DOC001",
+        "DOC003"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC001",
+          "page": 2,
+          "score": 0.8741
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 8,
+          "score": 0.8718
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 9,
+          "score": 0.8711
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 7,
+          "score": 0.871
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 8,
+          "score": 0.8705
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 3,
+          "score": 0.8665
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 6,
+          "score": 0.8645
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 2,
+          "score": 0.8637
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.8626
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 6,
+          "score": 0.8616
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "Q004",
+      "lang": "fr",
+      "cas": "NET02",
+      "question": "Je n'arrive pas à me connecter à mon réseau Wi-Fi alors que je vois le réseau.",
+      "gold_doc_ids": [
+        "DOC001",
+        "DOC002",
+        "DOC003"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC028",
+          "page": 1,
+          "score": 0.8746
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 8,
+          "score": 0.8722
+        },
+        {
+          "doc_id": "DOC045",
+          "page": 2,
+          "score": 0.866
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.8636
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 7,
+          "score": 0.8635
+        },
+        {
+          "doc_id": "DOC002",
+          "page": 1,
+          "score": 0.8605
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 2,
+          "score": 0.8582
+        },
+        {
+          "doc_id": "DOC015",
+          "page": 3,
+          "score": 0.8568
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.8554
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 3,
+          "score": 0.8535
+        }
+      ],
+      "first_relevant_rank": 2,
+      "reciprocal_rank": 0.5,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "Q005",
+      "lang": "en",
+      "cas": "NET02",
+      "question": "I keep getting a wrong password error when connecting to my Wi-Fi network.",
+      "gold_doc_ids": [
+        "DOC001",
+        "DOC002",
+        "DOC003"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.8665
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 7,
+          "score": 0.8635
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.8602
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 2,
+          "score": 0.8548
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 2,
+          "score": 0.8527
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 6,
+          "score": 0.852
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 4,
+          "score": 0.8518
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 4,
+          "score": 0.8508
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 8,
+          "score": 0.849
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 1,
+          "score": 0.849
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "Q006",
+      "lang": "fr",
+      "cas": "NET03",
+      "question": "Ma connexion Wi-Fi se coupe sans arrêt, que vérifier ?",
+      "gold_doc_ids": [
+        "DOC001",
+        "DOC003"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC001",
+          "page": 8,
+          "score": 0.898
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 4,
+          "score": 0.8954
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 1,
+          "score": 0.8945
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 1,
+          "score": 0.8907
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.8882
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 2,
+          "score": 0.8865
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 2,
+          "score": 0.8844
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 6,
+          "score": 0.8843
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.884
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 5,
+          "score": 0.8817
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "Q007",
+      "lang": "en",
+      "cas": "NET03",
+      "question": "My laptop keeps disconnecting from Wi-Fi every few minutes.",
+      "gold_doc_ids": [
+        "DOC001",
+        "DOC003"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.8646
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 1,
+          "score": 0.8611
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 6,
+          "score": 0.8574
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 4,
+          "score": 0.8533
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.8532
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 7,
+          "score": 0.8512
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 8,
+          "score": 0.8489
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 1,
+          "score": 0.8479
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 2,
+          "score": 0.8474
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 2,
+          "score": 0.8461
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "Q008",
+      "lang": "fr",
+      "cas": "NET04",
+      "question": "Je suis connecté au Wi-Fi mais je n'ai pas accès à Internet.",
+      "gold_doc_ids": [
+        "DOC001",
+        "DOC003"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC028",
+          "page": 1,
+          "score": 0.8647
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 8,
+          "score": 0.8598
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.8587
+        },
+        {
+          "doc_id": "DOC002",
+          "page": 1,
+          "score": 0.8442
+        },
+        {
+          "doc_id": "DOC015",
+          "page": 3,
+          "score": 0.8441
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 1,
+          "score": 0.844
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 2,
+          "score": 0.8436
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 7,
+          "score": 0.8427
+        },
+        {
+          "doc_id": "DOC045",
+          "page": 2,
+          "score": 0.842
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 6,
+          "score": 0.8379
+        }
+      ],
+      "first_relevant_rank": 2,
+      "reciprocal_rank": 0.5,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "Q009",
+      "lang": "en",
+      "cas": "NET04",
+      "question": "My PC is connected to Wi-Fi but has no internet access.",
+      "gold_doc_ids": [
+        "DOC001",
+        "DOC003"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.8683
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 8,
+          "score": 0.8662
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 7,
+          "score": 0.8632
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 6,
+          "score": 0.862
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 2,
+          "score": 0.8533
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.8501
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 1,
+          "score": 0.8485
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 4,
+          "score": 0.8481
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 1,
+          "score": 0.8477
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 6,
+          "score": 0.8447
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "Q010",
+      "lang": "fr",
+      "cas": "PC01",
+      "question": "Mon PC est très lent depuis quelques jours, comment l'accélérer ?",
+      "gold_doc_ids": [
+        "DOC004",
+        "DOC005",
+        "DOC036"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC028",
+          "page": 2,
+          "score": 0.8732
+        },
+        {
+          "doc_id": "DOC035",
+          "page": 1,
+          "score": 0.8717
+        },
+        {
+          "doc_id": "DOC004",
+          "page": 4,
+          "score": 0.8709
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 3,
+          "score": 0.8706
+        },
+        {
+          "doc_id": "DOC027",
+          "page": 5,
+          "score": 0.8678
+        },
+        {
+          "doc_id": "DOC004",
+          "page": 4,
+          "score": 0.8673
+        },
+        {
+          "doc_id": "DOC004",
+          "page": 1,
+          "score": 0.867
+        },
+        {
+          "doc_id": "DOC027",
+          "page": 4,
+          "score": 0.867
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 8,
+          "score": 0.8665
+        },
+        {
+          "doc_id": "DOC027",
+          "page": 6,
+          "score": 0.8654
+        }
+      ],
+      "first_relevant_rank": 3,
+      "reciprocal_rank": 0.3333,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "Q011",
+      "lang": "en",
+      "cas": "PC01",
+      "question": "How can I improve the performance of my slow Windows PC?",
+      "gold_doc_ids": [
+        "DOC004",
+        "DOC005",
+        "DOC036"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC004",
+          "page": 4,
+          "score": 0.8614
+        },
+        {
+          "doc_id": "DOC004",
+          "page": 1,
+          "score": 0.8497
+        },
+        {
+          "doc_id": "DOC004",
+          "page": 4,
+          "score": 0.8491
+        },
+        {
+          "doc_id": "DOC004",
+          "page": 2,
+          "score": 0.8455
+        },
+        {
+          "doc_id": "DOC004",
+          "page": 4,
+          "score": 0.8454
+        },
+        {
+          "doc_id": "DOC004",
+          "page": 1,
+          "score": 0.8421
+        },
+        {
+          "doc_id": "DOC004",
+          "page": 3,
+          "score": 0.8369
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 2,
+          "score": 0.8319
+        },
+        {
+          "doc_id": "DOC004",
+          "page": 3,
+          "score": 0.8305
+        },
+        {
+          "doc_id": "DOC036",
+          "page": 1,
+          "score": 0.8292
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "Q012",
+      "lang": "fr",
+      "cas": "PC01",
+      "question": "Trop d'applications se lancent au démarrage et ralentissent Windows.",
+      "gold_doc_ids": [
+        "DOC005",
+        "DOC004"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC005",
+          "page": 1,
+          "score": 0.8676
+        },
+        {
+          "doc_id": "DOC035",
+          "page": 1,
+          "score": 0.8577
+        },
+        {
+          "doc_id": "DOC004",
+          "page": 3,
+          "score": 0.8571
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 3,
+          "score": 0.8568
+        },
+        {
+          "doc_id": "DOC035",
+          "page": 1,
+          "score": 0.8548
+        },
+        {
+          "doc_id": "DOC027",
+          "page": 4,
+          "score": 0.8539
+        },
+        {
+          "doc_id": "DOC004",
+          "page": 1,
+          "score": 0.8539
+        },
+        {
+          "doc_id": "DOC004",
+          "page": 2,
+          "score": 0.8536
+        },
+        {
+          "doc_id": "DOC004",
+          "page": 2,
+          "score": 0.8534
+        },
+        {
+          "doc_id": "DOC032",
+          "page": 1,
+          "score": 0.8517
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "Q013",
+      "lang": "fr",
+      "cas": "PC02",
+      "question": "Une application ne répond plus et reste bloquée, comment la fermer ?",
+      "gold_doc_ids": [
+        "DOC029",
+        "DOC006"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC029",
+          "page": 1,
+          "score": 0.9077
+        },
+        {
+          "doc_id": "DOC029",
+          "page": 1,
+          "score": 0.8731
+        },
+        {
+          "doc_id": "DOC005",
+          "page": 3,
+          "score": 0.8664
+        },
+        {
+          "doc_id": "DOC007",
+          "page": 1,
+          "score": 0.8655
+        },
+        {
+          "doc_id": "DOC025",
+          "page": 6,
+          "score": 0.8636
+        },
+        {
+          "doc_id": "DOC032",
+          "page": 1,
+          "score": 0.8622
+        },
+        {
+          "doc_id": "DOC004",
+          "page": 4,
+          "score": 0.8581
+        },
+        {
+          "doc_id": "DOC005",
+          "page": 3,
+          "score": 0.8565
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 4,
+          "score": 0.8552
+        },
+        {
+          "doc_id": "DOC005",
+          "page": 2,
+          "score": 0.8546
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "Q014",
+      "lang": "en",
+      "cas": "PC02",
+      "question": "An app keeps crashing on Windows, how do I repair it?",
+      "gold_doc_ids": [
+        "DOC006",
+        "DOC007"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC006",
+          "page": 1,
+          "score": 0.8517
+        },
+        {
+          "doc_id": "DOC032",
+          "page": 1,
+          "score": 0.851
+        },
+        {
+          "doc_id": "DOC025",
+          "page": 2,
+          "score": 0.8454
+        },
+        {
+          "doc_id": "DOC032",
+          "page": 1,
+          "score": 0.8433
+        },
+        {
+          "doc_id": "DOC007",
+          "page": 1,
+          "score": 0.8432
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 2,
+          "score": 0.8432
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 6,
+          "score": 0.8425
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 5,
+          "score": 0.8425
+        },
+        {
+          "doc_id": "DOC026",
+          "page": 3,
+          "score": 0.8405
+        },
+        {
+          "doc_id": "DOC037",
+          "page": 3,
+          "score": 0.8403
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "Q015",
+      "lang": "fr",
+      "cas": "PC02",
+      "question": "Une application du Microsoft Store ne s'ouvre pas.",
+      "gold_doc_ids": [
+        "DOC007",
+        "DOC006"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC007",
+          "page": 1,
+          "score": 0.9073
+        },
+        {
+          "doc_id": "DOC007",
+          "page": 1,
+          "score": 0.8937
+        },
+        {
+          "doc_id": "DOC007",
+          "page": 1,
+          "score": 0.8917
+        },
+        {
+          "doc_id": "DOC008",
+          "page": 1,
+          "score": 0.8769
+        },
+        {
+          "doc_id": "DOC025",
+          "page": 2,
+          "score": 0.8768
+        },
+        {
+          "doc_id": "DOC025",
+          "page": 7,
+          "score": 0.869
+        },
+        {
+          "doc_id": "DOC025",
+          "page": 6,
+          "score": 0.8624
+        },
+        {
+          "doc_id": "DOC032",
+          "page": 1,
+          "score": 0.8578
+        },
+        {
+          "doc_id": "DOC025",
+          "page": 5,
+          "score": 0.8577
+        },
+        {
+          "doc_id": "DOC005",
+          "page": 2,
+          "score": 0.8575
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "Q016",
+      "lang": "fr",
+      "cas": "PC03",
+      "question": "Je n'ai plus d'espace disque sur mon PC, comment en libérer ?",
+      "gold_doc_ids": [
+        "DOC008",
+        "DOC009"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC008",
+          "page": 1,
+          "score": 0.8941
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 3,
+          "score": 0.8739
+        },
+        {
+          "doc_id": "DOC008",
+          "page": 3,
+          "score": 0.8686
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 2,
+          "score": 0.8656
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 6,
+          "score": 0.8637
+        },
+        {
+          "doc_id": "DOC027",
+          "page": 4,
+          "score": 0.8636
+        },
+        {
+          "doc_id": "DOC004",
+          "page": 2,
+          "score": 0.8628
+        },
+        {
+          "doc_id": "DOC031",
+          "page": 2,
+          "score": 0.861
+        },
+        {
+          "doc_id": "DOC008",
+          "page": 2,
+          "score": 0.8603
+        },
+        {
+          "doc_id": "DOC009",
+          "page": 1,
+          "score": 0.8598
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "Q017",
+      "lang": "en",
+      "cas": "PC03",
+      "question": "My C drive is almost full, how do I free up disk space on Windows?",
+      "gold_doc_ids": [
+        "DOC008",
+        "DOC009"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC028",
+          "page": 3,
+          "score": 0.8487
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 6,
+          "score": 0.8444
+        },
+        {
+          "doc_id": "DOC008",
+          "page": 1,
+          "score": 0.8428
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 2,
+          "score": 0.8421
+        },
+        {
+          "doc_id": "DOC031",
+          "page": 2,
+          "score": 0.8406
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 4,
+          "score": 0.839
+        },
+        {
+          "doc_id": "DOC008",
+          "page": 1,
+          "score": 0.8371
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 7,
+          "score": 0.8366
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 6,
+          "score": 0.8356
+        },
+        {
+          "doc_id": "DOC009",
+          "page": 1,
+          "score": 0.8356
+        }
+      ],
+      "first_relevant_rank": 3,
+      "reciprocal_rank": 0.3333,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "Q018",
+      "lang": "fr",
+      "cas": "PER01",
+      "question": "Je n'ai plus aucun son sur mon ordinateur.",
+      "gold_doc_ids": [
+        "DOC010",
+        "DOC012",
+        "DOC020"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC020",
+          "page": 1,
+          "score": 0.8451
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 5,
+          "score": 0.8349
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.8348
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 4,
+          "score": 0.8347
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 2,
+          "score": 0.8344
+        },
+        {
+          "doc_id": "DOC012",
+          "page": 2,
+          "score": 0.8341
+        },
+        {
+          "doc_id": "DOC011",
+          "page": 2,
+          "score": 0.8323
+        },
+        {
+          "doc_id": "DOC044",
+          "page": 4,
+          "score": 0.8319
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 3,
+          "score": 0.8319
+        },
+        {
+          "doc_id": "DOC044",
+          "page": 6,
+          "score": 0.8303
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "Q019",
+      "lang": "en",
+      "cas": "PER01",
+      "question": "There is no sound coming from my Windows laptop speakers.",
+      "gold_doc_ids": [
+        "DOC010",
+        "DOC012",
+        "DOC020"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC020",
+          "page": 1,
+          "score": 0.8404
+        },
+        {
+          "doc_id": "DOC019",
+          "page": 1,
+          "score": 0.8402
+        },
+        {
+          "doc_id": "DOC011",
+          "page": 2,
+          "score": 0.8358
+        },
+        {
+          "doc_id": "DOC020",
+          "page": 1,
+          "score": 0.8358
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 4,
+          "score": 0.8335
+        },
+        {
+          "doc_id": "DOC011",
+          "page": 2,
+          "score": 0.8292
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 3,
+          "score": 0.829
+        },
+        {
+          "doc_id": "DOC044",
+          "page": 4,
+          "score": 0.8277
+        },
+        {
+          "doc_id": "DOC044",
+          "page": 10,
+          "score": 0.8259
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 5,
+          "score": 0.8251
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "Q020",
+      "lang": "fr",
+      "cas": "PER01",
+      "question": "Mon périphérique de sortie audio n'est pas détecté.",
+      "gold_doc_ids": [
+        "DOC020",
+        "DOC010"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC020",
+          "page": 1,
+          "score": 0.8761
+        },
+        {
+          "doc_id": "DOC020",
+          "page": 1,
+          "score": 0.8757
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 3,
+          "score": 0.8637
+        },
+        {
+          "doc_id": "DOC011",
+          "page": 2,
+          "score": 0.8635
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 5,
+          "score": 0.8608
+        },
+        {
+          "doc_id": "DOC044",
+          "page": 4,
+          "score": 0.8578
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 5,
+          "score": 0.8576
+        },
+        {
+          "doc_id": "DOC011",
+          "page": 2,
+          "score": 0.8558
+        },
+        {
+          "doc_id": "DOC020",
+          "page": 2,
+          "score": 0.8544
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 4,
+          "score": 0.8524
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "Q021",
+      "lang": "fr",
+      "cas": "PER02",
+      "question": "Mon microphone ne fonctionne pas pendant les appels.",
+      "gold_doc_ids": [
+        "DOC011"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC010",
+          "page": 7,
+          "score": 0.8716
+        },
+        {
+          "doc_id": "DOC011",
+          "page": 1,
+          "score": 0.8682
+        },
+        {
+          "doc_id": "DOC011",
+          "page": 1,
+          "score": 0.8602
+        },
+        {
+          "doc_id": "DOC011",
+          "page": 1,
+          "score": 0.8601
+        },
+        {
+          "doc_id": "DOC011",
+          "page": 2,
+          "score": 0.8588
+        },
+        {
+          "doc_id": "DOC020",
+          "page": 1,
+          "score": 0.8567
+        },
+        {
+          "doc_id": "DOC011",
+          "page": 2,
+          "score": 0.8519
+        },
+        {
+          "doc_id": "DOC044",
+          "page": 4,
+          "score": 0.8511
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 5,
+          "score": 0.8496
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 4,
+          "score": 0.8491
+        }
+      ],
+      "first_relevant_rank": 2,
+      "reciprocal_rank": 0.5,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "Q022",
+      "lang": "en",
+      "cas": "PER02",
+      "question": "My microphone is not working in Windows, nobody can hear me.",
+      "gold_doc_ids": [
+        "DOC011"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC011",
+          "page": 1,
+          "score": 0.8551
+        },
+        {
+          "doc_id": "DOC011",
+          "page": 2,
+          "score": 0.8541
+        },
+        {
+          "doc_id": "DOC011",
+          "page": 2,
+          "score": 0.8487
+        },
+        {
+          "doc_id": "DOC011",
+          "page": 1,
+          "score": 0.8474
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 5,
+          "score": 0.8452
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 4,
+          "score": 0.8427
+        },
+        {
+          "doc_id": "DOC011",
+          "page": 1,
+          "score": 0.842
+        },
+        {
+          "doc_id": "DOC020",
+          "page": 1,
+          "score": 0.842
+        },
+        {
+          "doc_id": "DOC020",
+          "page": 1,
+          "score": 0.8418
+        },
+        {
+          "doc_id": "DOC011",
+          "page": 2,
+          "score": 0.8384
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "Q023",
+      "lang": "fr",
+      "cas": "PER03",
+      "question": "Mon clavier et ma souris ne sont pas détectés par Windows.",
+      "gold_doc_ids": [
+        "DOC013",
+        "DOC024"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC013",
+          "page": 2,
+          "score": 0.8581
+        },
+        {
+          "doc_id": "DOC027",
+          "page": 4,
+          "score": 0.8447
+        },
+        {
+          "doc_id": "DOC027",
+          "page": 4,
+          "score": 0.8431
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 9,
+          "score": 0.8428
+        },
+        {
+          "doc_id": "DOC018",
+          "page": 1,
+          "score": 0.8418
+        },
+        {
+          "doc_id": "DOC044",
+          "page": 4,
+          "score": 0.841
+        },
+        {
+          "doc_id": "DOC042",
+          "page": 4,
+          "score": 0.8407
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 4,
+          "score": 0.84
+        },
+        {
+          "doc_id": "DOC033",
+          "page": 2,
+          "score": 0.8391
+        },
+        {
+          "doc_id": "DOC011",
+          "page": 2,
+          "score": 0.8386
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "Q024",
+      "lang": "en",
+      "cas": "PER03",
+      "question": "My wireless mouse is not detected on my Windows PC.",
+      "gold_doc_ids": [
+        "DOC013",
+        "DOC024"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC018",
+          "page": 1,
+          "score": 0.8467
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 9,
+          "score": 0.8373
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.8372
+        },
+        {
+          "doc_id": "DOC044",
+          "page": 7,
+          "score": 0.8331
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 7,
+          "score": 0.833
+        },
+        {
+          "doc_id": "DOC044",
+          "page": 3,
+          "score": 0.8317
+        },
+        {
+          "doc_id": "DOC044",
+          "page": 4,
+          "score": 0.8305
+        },
+        {
+          "doc_id": "DOC044",
+          "page": 10,
+          "score": 0.83
+        },
+        {
+          "doc_id": "DOC044",
+          "page": 2,
+          "score": 0.8274
+        },
+        {
+          "doc_id": "DOC044",
+          "page": 3,
+          "score": 0.8269
+        }
+      ],
+      "first_relevant_rank": 0,
+      "reciprocal_rank": 0.0,
+      "hit@5": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "query_id": "Q025",
+      "lang": "fr",
+      "cas": "PER03",
+      "question": "Le pavé tactile de mon ordinateur portable ne répond plus.",
+      "gold_doc_ids": [
+        "DOC016",
+        "DOC013"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC016",
+          "page": 1,
+          "score": 0.8713
+        },
+        {
+          "doc_id": "DOC013",
+          "page": 1,
+          "score": 0.8704
+        },
+        {
+          "doc_id": "DOC016",
+          "page": 2,
+          "score": 0.8617
+        },
+        {
+          "doc_id": "DOC016",
+          "page": 1,
+          "score": 0.8595
+        },
+        {
+          "doc_id": "DOC025",
+          "page": 10,
+          "score": 0.8579
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.8576
+        },
+        {
+          "doc_id": "DOC044",
+          "page": 13,
+          "score": 0.8575
+        },
+        {
+          "doc_id": "DOC044",
+          "page": 4,
+          "score": 0.8565
+        },
+        {
+          "doc_id": "DOC026",
+          "page": 2,
+          "score": 0.8565
+        },
+        {
+          "doc_id": "DOC044",
+          "page": 7,
+          "score": 0.8562
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "Q026",
+      "lang": "fr",
+      "cas": "NET02",
+      "question": "Comment se connecter à un réseau Wi-Fi sous Windows ?",
+      "gold_doc_ids": [
+        "DOC002",
+        "DOC001"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC001",
+          "page": 2,
+          "score": 0.9091
+        },
+        {
+          "doc_id": "DOC002",
+          "page": 1,
+          "score": 0.9067
+        },
+        {
+          "doc_id": "DOC002",
+          "page": 1,
+          "score": 0.9018
+        },
+        {
+          "doc_id": "DOC002",
+          "page": 2,
+          "score": 0.8919
+        },
+        {
+          "doc_id": "DOC045",
+          "page": 1,
+          "score": 0.8908
+        },
+        {
+          "doc_id": "DOC002",
+          "page": 1,
+          "score": 0.8898
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.8887
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 8,
+          "score": 0.8884
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 3,
+          "score": 0.8875
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 1,
+          "score": 0.886
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "Q027",
+      "lang": "en",
+      "cas": "NET04",
+      "question": "My Wi-Fi shows connected but websites won't load.",
+      "gold_doc_ids": [
+        "DOC001",
+        "DOC003"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.8538
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 7,
+          "score": 0.8538
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 8,
+          "score": 0.8522
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 1,
+          "score": 0.8488
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 4,
+          "score": 0.8442
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 1,
+          "score": 0.8441
+        },
+        {
+          "doc_id": "DOC015",
+          "page": 3,
+          "score": 0.8425
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 2,
+          "score": 0.8377
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 1,
+          "score": 0.8367
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.8367
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "Q028",
+      "lang": "fr",
+      "cas": "PC01",
+      "question": "Mon ordinateur se fige et rame tout le temps.",
+      "gold_doc_ids": [
+        "DOC036",
+        "DOC004"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC028",
+          "page": 4,
+          "score": 0.8476
+        },
+        {
+          "doc_id": "DOC040",
+          "page": 1,
+          "score": 0.8453
+        },
+        {
+          "doc_id": "DOC037",
+          "page": 3,
+          "score": 0.8434
+        },
+        {
+          "doc_id": "DOC044",
+          "page": 6,
+          "score": 0.8407
+        },
+        {
+          "doc_id": "DOC027",
+          "page": 4,
+          "score": 0.8392
+        },
+        {
+          "doc_id": "DOC026",
+          "page": 2,
+          "score": 0.8377
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.8367
+        },
+        {
+          "doc_id": "DOC033",
+          "page": 2,
+          "score": 0.8361
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 2,
+          "score": 0.8355
+        },
+        {
+          "doc_id": "DOC038",
+          "page": 1,
+          "score": 0.8352
+        }
+      ],
+      "first_relevant_rank": 0,
+      "reciprocal_rank": 0.0,
+      "hit@5": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "query_id": "Q029",
+      "lang": "en",
+      "cas": "PC03",
+      "question": "How do I use Storage Sense to manage disk space automatically?",
+      "gold_doc_ids": [
+        "DOC009",
+        "DOC008"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC008",
+          "page": 1,
+          "score": 0.8305
+        },
+        {
+          "doc_id": "DOC008",
+          "page": 2,
+          "score": 0.8248
+        },
+        {
+          "doc_id": "DOC009",
+          "page": 1,
+          "score": 0.8233
+        },
+        {
+          "doc_id": "DOC009",
+          "page": 1,
+          "score": 0.8222
+        },
+        {
+          "doc_id": "DOC037",
+          "page": 3,
+          "score": 0.8165
+        },
+        {
+          "doc_id": "DOC009",
+          "page": 1,
+          "score": 0.8151
+        },
+        {
+          "doc_id": "DOC005",
+          "page": 2,
+          "score": 0.8132
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 7,
+          "score": 0.813
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 2,
+          "score": 0.8129
+        },
+        {
+          "doc_id": "DOC008",
+          "page": 3,
+          "score": 0.8117
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "Q030",
+      "lang": "fr",
+      "cas": "PER01",
+      "question": "Comment mettre à jour mes pilotes audio sous Windows ?",
+      "gold_doc_ids": [
+        "DOC012",
+        "DOC010"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC012",
+          "page": 1,
+          "score": 0.9427
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 5,
+          "score": 0.9328
+        },
+        {
+          "doc_id": "DOC012",
+          "page": 1,
+          "score": 0.9289
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 5,
+          "score": 0.9253
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 6,
+          "score": 0.9177
+        },
+        {
+          "doc_id": "DOC011",
+          "page": 2,
+          "score": 0.9173
+        },
+        {
+          "doc_id": "DOC013",
+          "page": 2,
+          "score": 0.9159
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 4,
+          "score": 0.914
+        },
+        {
+          "doc_id": "DOC012",
+          "page": 2,
+          "score": 0.9127
+        },
+        {
+          "doc_id": "DOC024",
+          "page": 2,
+          "score": 0.9122
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    }
+  ],
+  "hors_corpus_details": [
+    {
+      "query_id": "Q031",
+      "lang": "fr",
+      "question": "Comment remplacer la courroie de distribution de ma voiture ?",
+      "top_score": 0.8247,
+      "top_doc_id": "DOC008"
+    },
+    {
+      "query_id": "Q032",
+      "lang": "en",
+      "question": "How do I replace the timing belt in my car?",
+      "top_score": 0.8102,
+      "top_doc_id": "DOC044"
+    },
+    {
+      "query_id": "Q033",
+      "lang": "fr",
+      "question": "Quelle est la meilleure recette de couscous tunisien ?",
+      "top_score": 0.793,
+      "top_doc_id": "DOC038"
+    },
+    {
+      "query_id": "Q034",
+      "lang": "en",
+      "question": "What is the capital of Australia?",
+      "top_score": 0.7153,
+      "top_doc_id": "DOC025"
+    },
+    {
+      "query_id": "Q035",
+      "lang": "fr",
+      "question": "Comment déclarer mes impôts en ligne cette année ?",
+      "top_score": 0.8421,
+      "top_doc_id": "DOC028"
+    },
+    {
+      "query_id": "Q036",
+      "lang": "en",
+      "question": "Can you recommend a good restaurant near me?",
+      "top_score": 0.7807,
+      "top_doc_id": "DOC026"
+    },
+    {
+      "query_id": "Q037",
+      "lang": "fr",
+      "question": "Explique-moi la théorie de la relativité restreinte.",
+      "top_score": 0.8374,
+      "top_doc_id": "DOC026"
+    },
+    {
+      "query_id": "Q038",
+      "lang": "en",
+      "question": "How do I train a convolutional neural network in PyTorch?",
+      "top_score": 0.7773,
+      "top_doc_id": "DOC026"
+    }
+  ]
+}
