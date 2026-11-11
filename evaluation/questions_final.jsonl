@@ -1,0 +1,50 @@
+{"query_id": "F001", "lang": "fr", "cas": "PC01", "question": "Windows met très longtemps à démarrer le matin.", "gold_doc_ids": ["DOC005", "DOC004"], "answerable": true}
+{"query_id": "F002", "lang": "en", "cas": "PC01", "question": "My PC takes forever to boot up.", "gold_doc_ids": ["DOC005", "DOC004"], "answerable": true}
+{"query_id": "F003", "lang": "fr", "cas": "PC01", "question": "Le processeur de mon PC est constamment à 100 %.", "gold_doc_ids": ["DOC035", "DOC004"], "answerable": true}
+{"query_id": "F004", "lang": "en", "cas": "PC01", "question": "My laptop is sluggish and programs take ages to open.", "gold_doc_ids": ["DOC004", "DOC036"], "answerable": true}
+{"query_id": "F005", "lang": "fr", "cas": "PC02", "question": "Word ne répond plus et je n'arrive pas à le fermer.", "gold_doc_ids": ["DOC029", "DOC006"], "answerable": true}
+{"query_id": "F006", "lang": "en", "cas": "PC02", "question": "A Windows app won't launch at all.", "gold_doc_ids": ["DOC006", "DOC007"], "answerable": true}
+{"query_id": "F007", "lang": "fr", "cas": "PC02", "question": "Une application plante dès que je l'ouvre.", "gold_doc_ids": ["DOC006", "DOC007"], "answerable": true}
+{"query_id": "F008", "lang": "en", "cas": "PC02", "question": "How do I force quit a frozen program on Windows?", "gold_doc_ids": ["DOC029"], "answerable": true}
+{"query_id": "F009", "lang": "fr", "cas": "PC03", "question": "Windows affiche que mon disque est presque plein.", "gold_doc_ids": ["DOC008", "DOC009"], "answerable": true}
+{"query_id": "F010", "lang": "en", "cas": "PC03", "question": "How do I clean up temporary files to free space?", "gold_doc_ids": ["DOC008", "DOC009"], "answerable": true}
+{"query_id": "F011", "lang": "fr", "cas": "PC03", "question": "Comment activer le nettoyage automatique du disque ?", "gold_doc_ids": ["DOC009", "DOC008"], "answerable": true}
+{"query_id": "F012", "lang": "en", "cas": "PC03", "question": "My laptop warns there is not enough storage to update.", "gold_doc_ids": ["DOC008", "DOC009"], "answerable": true}
+{"query_id": "F013", "lang": "fr", "cas": "PER01", "question": "Le son de mon casque ne marche pas sur Windows.", "gold_doc_ids": ["DOC010", "DOC020"], "answerable": true}
+{"query_id": "F014", "lang": "en", "cas": "PER01", "question": "No audio from my laptop after the last update.", "gold_doc_ids": ["DOC010", "DOC012"], "answerable": true}
+{"query_id": "F015", "lang": "fr", "cas": "PER01", "question": "Windows ne détecte plus mes haut-parleurs.", "gold_doc_ids": ["DOC020", "DOC010"], "answerable": true}
+{"query_id": "F016", "lang": "en", "cas": "PER01", "question": "How do I reinstall my audio driver on Windows?", "gold_doc_ids": ["DOC012", "DOC010"], "answerable": true}
+{"query_id": "F017", "lang": "fr", "cas": "PER02", "question": "Personne ne m'entend pendant mes réunions en ligne.", "gold_doc_ids": ["DOC011"], "answerable": true}
+{"query_id": "F018", "lang": "en", "cas": "PER02", "question": "My headset mic is not picked up by Windows.", "gold_doc_ids": ["DOC011"], "answerable": true}
+{"query_id": "F019", "lang": "fr", "cas": "PER02", "question": "Comment autoriser le microphone pour une application ?", "gold_doc_ids": ["DOC011"], "answerable": true}
+{"query_id": "F020", "lang": "en", "cas": "PER02", "question": "Windows does not detect my microphone at all.", "gold_doc_ids": ["DOC011"], "answerable": true}
+{"query_id": "F021", "lang": "fr", "cas": "PER03", "question": "Mon clavier externe ne répond plus après la mise en veille.", "gold_doc_ids": ["DOC013"], "answerable": true}
+{"query_id": "F022", "lang": "en", "cas": "PER03", "question": "My touchpad stopped working on my laptop.", "gold_doc_ids": ["DOC016", "DOC013"], "answerable": true}
+{"query_id": "F023", "lang": "fr", "cas": "PER03", "question": "Ma souris Bluetooth n'est pas reconnue par Windows.", "gold_doc_ids": ["DOC024", "DOC013"], "answerable": true}
+{"query_id": "F024", "lang": "en", "cas": "PER03", "question": "Some keys on my keyboard are not working in Windows.", "gold_doc_ids": ["DOC013"], "answerable": true}
+{"query_id": "F025", "lang": "fr", "cas": "NET01", "question": "La liste des réseaux Wi-Fi est vide sur mon portable.", "gold_doc_ids": ["DOC001", "DOC003"], "answerable": true}
+{"query_id": "F026", "lang": "en", "cas": "NET01", "question": "No Wi-Fi networks show up in the taskbar.", "gold_doc_ids": ["DOC001", "DOC003"], "answerable": true}
+{"query_id": "F027", "lang": "fr", "cas": "NET01", "question": "Mon PC ne détecte pas le Wi-Fi alors que mon téléphone le voit.", "gold_doc_ids": ["DOC001", "DOC003"], "answerable": true}
+{"query_id": "F028", "lang": "en", "cas": "NET01", "question": "Windows can't see my home wireless network.", "gold_doc_ids": ["DOC001", "DOC003"], "answerable": true}
+{"query_id": "F029", "lang": "fr", "cas": "NET02", "question": "Windows refuse mon mot de passe Wi-Fi alors qu'il est correct.", "gold_doc_ids": ["DOC001", "DOC002", "DOC003"], "answerable": true}
+{"query_id": "F030", "lang": "en", "cas": "NET02", "question": "I select my Wi-Fi network but it won't connect.", "gold_doc_ids": ["DOC001", "DOC002", "DOC003"], "answerable": true}
+{"query_id": "F031", "lang": "fr", "cas": "NET02", "question": "Comment oublier puis reconnecter un réseau Wi-Fi ?", "gold_doc_ids": ["DOC002", "DOC001"], "answerable": true}
+{"query_id": "F032", "lang": "en", "cas": "NET02", "question": "Connecting to Wi-Fi shows a 'can't connect to this network' error.", "gold_doc_ids": ["DOC001", "DOC003"], "answerable": true}
+{"query_id": "F033", "lang": "fr", "cas": "NET03", "question": "Mon Wi-Fi se déconnecte toutes les cinq minutes.", "gold_doc_ids": ["DOC001", "DOC003"], "answerable": true}
+{"query_id": "F034", "lang": "en", "cas": "NET03", "question": "My Wi-Fi keeps dropping randomly throughout the day.", "gold_doc_ids": ["DOC001", "DOC003"], "answerable": true}
+{"query_id": "F035", "lang": "fr", "cas": "NET03", "question": "La connexion sans fil est instable depuis la dernière mise à jour.", "gold_doc_ids": ["DOC001", "DOC003"], "answerable": true}
+{"query_id": "F036", "lang": "en", "cas": "NET03", "question": "Wi-Fi disconnects whenever my laptop wakes from sleep.", "gold_doc_ids": ["DOC001", "DOC003"], "answerable": true}
+{"query_id": "F037", "lang": "fr", "cas": "NET04", "question": "Wi-Fi connecté mais aucune page web ne se charge.", "gold_doc_ids": ["DOC001", "DOC003"], "answerable": true}
+{"query_id": "F038", "lang": "en", "cas": "NET04", "question": "Connected to Wi-Fi, no internet, yellow triangle on the icon.", "gold_doc_ids": ["DOC001", "DOC003"], "answerable": true}
+{"query_id": "F039", "lang": "fr", "cas": "NET04", "question": "J'ai le Wi-Fi mais Internet ne fonctionne pas, que faire ?", "gold_doc_ids": ["DOC001", "DOC003"], "answerable": true}
+{"query_id": "F040", "lang": "en", "cas": "NET04", "question": "Wi-Fi shows 'no internet, secured' on Windows.", "gold_doc_ids": ["DOC001", "DOC003"], "answerable": true}
+{"query_id": "F041", "lang": "fr", "cas": "HORS", "question": "Quelle est la capitale du Canada ?", "gold_doc_ids": [], "answerable": false}
+{"query_id": "F042", "lang": "en", "cas": "HORS", "question": "What's the best way to learn Spanish?", "gold_doc_ids": [], "answerable": false}
+{"query_id": "F043", "lang": "fr", "cas": "HORS", "question": "Comment changer un pneu crevé sur ma voiture ?", "gold_doc_ids": [], "answerable": false}
+{"query_id": "F044", "lang": "en", "cas": "HORS", "question": "Give me a recipe for chocolate chip cookies.", "gold_doc_ids": [], "answerable": false}
+{"query_id": "F045", "lang": "fr", "cas": "HORS", "question": "Quels sont les symptômes de la grippe ?", "gold_doc_ids": [], "answerable": false}
+{"query_id": "F046", "lang": "en", "cas": "HORS", "question": "How do I invest in the stock market?", "gold_doc_ids": [], "answerable": false}
+{"query_id": "F047", "lang": "fr", "cas": "HORS", "question": "Quel temps fera-t-il demain à Tunis ?", "gold_doc_ids": [], "answerable": false}
+{"query_id": "F048", "lang": "en", "cas": "HORS", "question": "Write a short poem about the ocean.", "gold_doc_ids": [], "answerable": false}
+{"query_id": "F049", "lang": "fr", "cas": "HORS", "question": "Comment fixer une étagère au mur ?", "gold_doc_ids": [], "answerable": false}
+{"query_id": "F050", "lang": "en", "cas": "HORS", "question": "What is the population of Japan?", "gold_doc_ids": [], "answerable": false}
