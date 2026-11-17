@@ -1,3 +1,4 @@
+import threading
 from functools import lru_cache
 
 from sentence_transformers import SentenceTransformer
@@ -5,14 +6,23 @@ from sentence_transformers import SentenceTransformer
 
 MODEL_NAME = "intfloat/multilingual-e5-small"
 
+# Le préchargement (thread au démarrage) et une première requête peuvent
+# demander le modèle en même temps : le verrou garantit un seul chargement.
+_verrou_modele = threading.Lock()
+
 
 @lru_cache(maxsize=1)
-def get_model():
-    """Charger le modèle une seule fois par processus Python."""
+def _charger_modele():
     return SentenceTransformer(
         MODEL_NAME,
         device="cpu",
     )
+
+
+def get_model():
+    """Charger le modèle une seule fois par processus Python."""
+    with _verrou_modele:
+        return _charger_modele()
 
 
 def encode_texts(texts, prefix):
