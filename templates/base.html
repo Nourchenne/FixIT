@@ -26,7 +26,17 @@
     <div class="container nav-row">
       <a class="brand" href="{% url 'assistant:chat' %}">Fix<span>IT</span></a>
       <nav class="main-nav">
-        <a href="{% url 'assistant:chat' %}" class="{% block nav_assistant %}{% endblock %}">Assistant</a>
+        {% if user.is_authenticated %}
+          <a href="{% url 'assistant:chat' %}" class="{% block nav_assistant %}{% endblock %}">Assistant</a>
+          {% block nav_extra %}{% endblock %}
+          <span class="nav-user">{{ user.get_username }}</span>
+          <form method="post" action="{% url 'logout' %}" class="nav-logout">
+            {% csrf_token %}
+            <button type="submit">Déconnexion</button>
+          </form>
+        {% else %}
+          <a href="{% url 'login' %}" class="active">Connexion</a>
+        {% endif %}
       </nav>
     </div>
   </header>
@@ -38,7 +48,7 @@
       <div class="row">
         <div class="col-md-5 mb-4">
           <h4>FixIT</h4>
-          <p style="font-size:0.9rem; max-width:360px;">
+          <p class="footer-text">
             Assistant de dépannage pour PC sous Windows 11 et connexions Wi-Fi.
             Les réponses s'appuient sur une base documentaire technique et citent
             leurs sources.
@@ -56,13 +66,15 @@
         <div class="col-md-3 mb-4">
           <h4>Accès</h4>
           <ul>
-            <li><a href="{% url 'assistant:chat' %}">Assistant de dépannage</a></li>
+            {% if user.is_authenticated %}
+              <li><a href="{% url 'assistant:chat' %}">Assistant de dépannage</a></li>
+            {% else %}
+              <li><a href="{% url 'login' %}">Connexion</a></li>
+            {% endif %}
           </ul>
         </div>
       </div>
-      <div class="footer-bottom">
-        FixIT — Projet AI Engineering.
-      </div>
+      <div class="footer-bottom">FixIT — Projet AI Engineering.</div>
     </div>
   </footer>
 
