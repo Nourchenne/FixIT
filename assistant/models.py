@@ -39,11 +39,16 @@ class Message(models.Model):
     # Citations renvoyées par answer_question : liste de dicts
     # {ref, doc_id, titre, page, url}. Vide pour les messages utilisateur.
     references = models.JSONField(default=list, blank=True)
+    # Type de réponse de FixIT : "etapes", "repli" ou "clarification".
+    # Permet de relier la réponse de l'utilisateur à une clarification.
+    type_reponse = models.CharField(max_length=20, blank=True)
     cree_le = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name = "message"
-        ordering = ["cree_le"]
+        # "id" départage deux messages créés dans la même milliseconde
+        # (fréquent sous Windows, où l'horloge est peu précise).
+        ordering = ["cree_le", "id"]
 
     def __str__(self):
         return f"[{self.get_role_display()}] {self.contenu[:40]}"

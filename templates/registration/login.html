@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}FixIT — Connexion{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="auth-card">
+      <div class="chat-head">Connexion à FixIT</div>
+      <form method="post" action="{% url 'login' %}" class="auth-body">
+        {% csrf_token %}
+        {% if form.errors %}
+          <p class="form-error">Identifiant ou mot de passe incorrect.</p>
+        {% endif %}
+        {% if next and user.is_authenticated %}
+          <p class="form-error">Votre compte n'a pas accès à cette page.</p>
+        {% endif %}
+        <div class="form-field">
+          <label for="id_username">Identifiant</label>
+          <input type="text" name="username" id="id_username" autocomplete="username"
+                 value="{{ form.username.value|default:'' }}" required autofocus>
+        </div>
+        <div class="form-field">
+          <label for="id_password">Mot de passe</label>
+          <input type="password" name="password" id="id_password"
+                 autocomplete="current-password" required>
+        </div>
+        <input type="hidden" name="next" value="{{ next }}">
+        <button type="submit" class="btn-orange btn-block">Se connecter</button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}
