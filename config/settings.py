@@ -127,3 +127,17 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Journalisation : affiche dans la console de runserver les temps de réponse
+# de FixIT (recherche, génération) et l'état du préchargement.
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {'simple': {'format': '[%(asctime)s] %(message)s', 'datefmt': '%H:%M:%S'}},
+    'handlers': {'console': {'class': 'logging.StreamHandler', 'formatter': 'simple'}},
+    'loggers': {
+        'assistant': {'handlers': ['console'], 'level': 'INFO'},
+        'tickets': {'handlers': ['console'], 'level': 'INFO'},
+        'integrations': {'handlers': ['console'], 'level': 'INFO'},
+    },
+}

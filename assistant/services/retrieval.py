@@ -1,5 +1,6 @@
 import argparse
 import json
+from functools import lru_cache
 from pathlib import Path
 
 from qdrant_client import QdrantClient
@@ -14,8 +15,12 @@ BASE_DIR = Path(__file__).resolve().parents[2]
 INDEX_INFO_FILE = BASE_DIR / "data" / "processed" / "vector_index.json"
 
 
+@lru_cache(maxsize=1)
 def load_index_info():
-    """Lire la configuration de l'index terminé."""
+    """Lire la configuration de l'index terminé (une fois par processus).
+
+    Après une réindexation, redémarrer le serveur pour relire ce fichier.
+    """
     if not INDEX_INFO_FILE.is_file():
         raise FileNotFoundError(
             "Configuration de l'index introuvable. "
@@ -35,6 +40,13 @@ def load_index_info():
     return information
 
 
+@lru_cache(maxsize=1)
+def get_client():
+    """Un seul client Qdrant par processus : la connexion HTTP est réutilisée
+    au lieu d'être ouverte puis fermée à chaque question."""
+    return QdrantClient(url=QDRANT_URL)
+
+
 def search_documents(question, limit=3):
     """Rechercher les passages les plus proches d'une question."""
     if not isinstance(question, str) or not question.strip():
@@ -45,46 +57,41 @@ def search_documents(question, limit=3):
 
     information = load_index_info()
     collection_name = information["collection_name"]
-    
-    client = QdrantClient(url=QDRANT_URL)
+    client = get_client()
 
-    try:
-        if not client.collection_exists(collection_name):
-            raise ValueError(
-                f"Collection introuvable : {collection_name}"
-            )
-
-        # embed_query ajoute le préfixe "query: " et normalise le vecteur.
-        question_vector = embed_query(question)
-
-        if len(question_vector) != information["embedding_config"]["dimension"]:
-            raise ValueError(
-                "La dimension du vecteur ne correspond pas à celle de l'index."
-            )
-
-        response = client.query_points(
-            collection_name=collection_name,
-            query=question_vector.tolist(),
-            limit=limit,
-            with_payload=True,
-            with_vectors=False,
+    if not client.collection_exists(collection_name):
+        raise ValueError(
+            f"Collection introuvable : {collection_name}"
         )
 
-        results = []
+    # embed_query ajoute le préfixe "query: " et normalise le vecteur.
+    question_vector = embed_query(question)
 
-        for point in response.points:
-            payload = point.payload or {}
+    if len(question_vector) != information["embedding_config"]["dimension"]:
+        raise ValueError(
+            "La dimension du vecteur ne correspond pas à celle de l'index."
+        )
 
-            results.append({
-                "score": float(point.score),
-                "page_content": payload.get("page_content", ""),
-                "metadata": payload.get("metadata", {}),
-            })
+    response = client.query_points(
+        collection_name=collection_name,
+        query=question_vector.tolist(),
+        limit=limit,
+        with_payload=True,
+        with_vectors=False,
+    )
 
-        return results
+    results = []
 
-    finally:
-        client.close()
+    for point in response.points:
+        payload = point.payload or {}
+
+        results.append({
+            "score": float(point.score),
+            "page_content": payload.get("page_content", ""),
+            "metadata": payload.get("metadata", {}),
+        })
+
+    return results
 
 
 def main():
