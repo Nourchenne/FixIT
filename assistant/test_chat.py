@@ -107,3 +107,113 @@ class ChatTests(unittest.TestCase):
     def test_configuration_manquante(self, _dotenv):
         with self.assertRaises(ValueError):
             chat.get_modele()
+
+
+class LangueTests(unittest.TestCase):
+    """La langue de la réponse est décidée par le code, pas par le modèle."""
+
+    def test_detecter_langue(self):
+        cas = [
+            ("Mon ordinateur ne trouve aucun réseau Wi-Fi.", "fr"),
+            ("No Wi-Fi networks show up in the taskbar.", "en"),
+            ("Wi-Fi disconnects whenever my laptop wakes from sleep.", "en"),
+            ("Connected to Wi-Fi, no internet, yellow triangle on the icon.", "en"),
+            ("Réponds en anglais : mon Wi-Fi coupe.", "en"),
+            ("Answer in French: my Wi-Fi keeps dropping.", "fr"),
+            ("Wi-Fi ?", None),
+        ]
+        for texte, attendu in cas:
+            with self.subTest(texte=texte):
+                self.assertEqual(chat.detecter_langue(texte), attendu)
+
+    def test_question_courte_en_francais(self):
+        self.assertEqual(chat.langue_question("Wi-Fi ?"), "fr")
+
+    def test_langue_imposee_au_formatage(self):
+        meta = {"doc_id": "DOC001", "titre": "Guide", "page": 1,
+                "source_url": "https://example.org"}
+        r = chat.formater_reponse({"langue": "fr", "etapes": []},
+                                  [{"page_content": "x", "metadata": meta}],
+                                  langue="en")
+        self.assertEqual(r, repli("en"))
+
+    @patch.dict("os.environ", {"GROQ_API_KEY": "test", "GROQ_MODEL": "test"})
+    @patch.object(chat, "ChatGroq")
+    @patch.object(chat, "search_documents")
+    def test_reponse_dans_la_mauvaise_langue_relancee(self, recherche, modele):
+        recherche.return_value = [{"page_content": "Activez le Wi-Fi.", "metadata": {
+            "doc_id": "DOC001", "titre": "Guide Wi-Fi", "page": 8,
+            "source_url": "https://example.org/wifi"}}]
+        chat.get_modele.cache_clear()
+        self.addCleanup(chat.get_modele.cache_clear)
+        appel = modele.return_value.bind.return_value.invoke
+        en_francais = ('{"langue":"fr","resume":"Le PC ne voit aucun réseau.",'
+                       '"etapes":[{"texte":"Activez le Wi-Fi dans les paramètres.","source":1}]}')
+        en_anglais = ('{"langue":"en","resume":"The PC does not see any network.",'
+                      '"etapes":[{"texte":"Turn on Wi-Fi in the settings.","source":1}]}')
+        appel.side_effect = [type("M", (), {"content": en_francais}),
+                             type("M", (), {"content": en_anglais})]
+
+        r = chat.answer_question("No Wi-Fi networks show up in the taskbar.")
+
+        self.assertEqual(appel.call_count, 2)
+        demande = appel.call_args_list[0].args[0][1][1]
+        self.assertIn('"langue": "en"', demande)
+        self.assertEqual(r["langue"], "en")
+        self.assertIn("Turn on Wi-Fi in the settings. [S1]", r["answer"])
+
+
+class AvertissementTests(unittest.TestCase):
+    """Une étape qui peut effacer les données est précédée d'un avertissement."""
+
+    def setUp(self):
+        meta = {"doc_id": "DOC020", "titre": "Réinitialiser le PC", "page": 2,
+                "source_url": "https://example.org/reset"}
+        self.passages = [{"page_content": "x", "metadata": meta}]
+
+    def formater(self, langue, resume, texte):
+        donnees = {"langue": langue, "resume": resume,
+                   "etapes": [{"texte": texte, "source": 1}]}
+        return chat.formater_reponse(donnees, self.passages)["answer"].split("\n")
+
+    def test_avertissement_ajoute_avant_les_etapes(self):
+        lignes = self.formater(
+            "fr", "Vous voulez réinitialiser votre PC.",
+            "Ouvrez Réinitialiser ce PC, puis choisissez une option.")
+        self.assertEqual(lignes[1], chat.AVERTISSEMENT_DONNEES["fr"])
+        self.assertTrue(lignes[2].startswith("1. "))
+
+    def test_avertissement_en_anglais(self):
+        lignes = self.formater("en", "You want to reset your PC.",
+                               "Select Reset this PC, then Remove everything.")
+        self.assertIn(chat.AVERTISSEMENT_DONNEES["en"], lignes)
+
+    def test_pas_de_doublon_si_deja_averti(self):
+        lignes = self.formater(
+            "fr", "Vous voulez réinitialiser votre PC.",
+            "Sauvegardez vos fichiers, puis ouvrez Réinitialiser ce PC.")
+        self.assertNotIn(chat.AVERTISSEMENT_DONNEES["fr"], lignes)
+
+    def test_mot_perdu_dans_une_autre_etape_ne_suffit_pas(self):
+        # Cas réel : « Supprimer tout » sans avertissement à l'étape 1, et
+        # « seront perdues » à l'étape 2, qui parle d'un point de restauration.
+        donnees = {"langue": "fr", "resume": "Vous souhaitez réinitialiser votre PC.",
+                   "etapes": [
+                       {"texte": "Ouvrez Réinitialiser ce PC. Choisissez « Conserver "
+                                 "mes fichiers » ou « Supprimer tout ».", "source": 1},
+                       {"texte": "Choisissez un point de restauration. Seules les "
+                                 "modifications postérieures seront perdues.", "source": 1}]}
+        lignes = chat.formater_reponse(donnees, self.passages)["answer"].split("\n")
+        self.assertEqual(lignes[1], chat.AVERTISSEMENT_DONNEES["fr"])
+
+    def test_etape_sur_plusieurs_lignes_mise_sur_une_ligne(self):
+        donnees = {"langue": "fr", "etapes": [{"texte": "Exécutez :\n1. netsh int ip reset"
+                                                         "\n2. ipconfig /renew", "source": 1}]}
+        r = chat.formater_reponse(donnees, self.passages)
+        self.assertEqual(r["answer"],
+                         "1. Exécutez : 1. netsh int ip reset 2. ipconfig /renew [S1]")
+
+    def test_reinitialisation_du_reseau_non_concernee(self):
+        lignes = self.formater("fr", "Le Wi-Fi ne fonctionne plus.",
+                               "Lancez la réinitialisation du réseau.")
+        self.assertNotIn(chat.AVERTISSEMENT_DONNEES["fr"], lignes)
