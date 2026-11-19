@@ -1,0 +1,11 @@
+{
+  "date_utc": "20261127_133603",
+  "questions": 50,
+  "erreurs": 0,
+  "langue_correcte_pct": 100.0,
+  "repondables_guide_attendu_cite_pct": 72.5,
+  "repondables_sans_etapes": 5,
+  "hors_corpus_repli_correct_pct": 100.0,
+  "duree_mediane_s": 9.47,
+  "duree_max_s": 31.55
+}

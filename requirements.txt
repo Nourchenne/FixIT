@@ -52,6 +52,7 @@ pypdf==6.21.4
 python-dotenv==1.2.4
 PyYAML==6.0.3
 qdrant-client==1.20.0
+ragas==0.3.1
 regex==2026.9.29
 requests==2.34.2
 requests-toolbelt==1.0.0
