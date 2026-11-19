@@ -8,6 +8,15 @@ démarré :
 
     python -m evaluation.evaluate_retrieval
     python -m evaluation.evaluate_retrieval --limit 10
+    python -m evaluation.evaluate_retrieval --mode hybride --rerank
+
+Configurations (--mode, éventuellement suivi de --rerank) :
+- dense : recherche sémantique seule (référence, utilisée par le chat) ;
+- bm25 : recherche par mots-clés seule ;
+- hybride : dense + BM25 fusionnés par RRF.
+bm25 et hybride demandent python -m documents.services.indexing_hybride.
+Les scores hybrides sont des scores RRF : ils ne se comparent pas aux scores
+cosinus du dense (le classement, lui, se compare).
 
 Définitions utilisées (voir evaluation/README.md) :
 - Pertinence au niveau DOCUMENT : un passage est pertinent si son doc_id
@@ -244,6 +253,27 @@ def save_results(report, limit, config="dense"):
     return path
 
 
+def choisir_recherche(mode, avec_rerank=False, candidats=20):
+    """Fonction retrieve(question, limit) et nom de la configuration."""
+    if mode == "dense":
+        base = search_documents
+    else:
+        from assistant.services import recherche_hybride
+        base = (recherche_hybride.search_bm25 if mode == "bm25"
+                else recherche_hybride.search_hybride)
+
+    if not avec_rerank:
+        return (lambda question, limit: base(question, limit=limit)), mode
+
+    from assistant.services.reranking import rerank
+
+    def retrieve(question, limit):
+        vivier = base(question, limit=max(candidats, limit))
+        return rerank(question, vivier, top_k=limit)
+
+    return retrieve, f"{mode}_rerank"
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Évaluer la recherche documentaire de FixIT."
@@ -257,12 +287,16 @@ def main():
         help="Chemin du jeu de questions annoté (.jsonl).",
     )
     parser.add_argument(
+        "--mode", choices=("dense", "bm25", "hybride"), default="dense",
+        help="Méthode de recherche. Défaut : dense.",
+    )
+    parser.add_argument(
         "--rerank", action="store_true",
-        help="Ajouter un reranking cross-encoder après la recherche dense.",
+        help="Ajouter un reranking cross-encoder après la recherche choisie.",
     )
     parser.add_argument(
         "--candidates", type=int, default=20,
-        help="Candidats récupérés en dense avant reranking. Défaut : 20.",
+        help="Candidats récupérés avant reranking. Défaut : 20.",
     )
     args = parser.parse_args()
 
@@ -272,25 +306,16 @@ def main():
 
     questions = load_questions(args.questions)
 
-    # Choix de la fonction de recherche : dense (référence) ou reranké.
-    if args.rerank:
-        from assistant.services.reranking import search_documents_reranked
-        config = "rerank"
-
-        def retrieve(question, limit):
-            return search_documents_reranked(
-                question, limit=limit, candidate_limit=args.candidates
-            )
-    else:
-        config = "dense"
-
-        def retrieve(question, limit):
-            return search_documents(question, limit=limit)
+    retrieve, config = choisir_recherche(args.mode, args.rerank, args.candidates)
 
     collection_hint = ""
     try:
-        from assistant.services.retrieval import load_index_info
-        collection_hint = load_index_info().get("collection_name", "")
+        if args.mode == "dense":
+            from assistant.services.retrieval import load_index_info
+            collection_hint = load_index_info().get("collection_name", "")
+        else:
+            from assistant.services.recherche_hybride import collection_hybride
+            collection_hint = collection_hybride()
     except Exception:
         pass
 
