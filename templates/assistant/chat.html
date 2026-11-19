@@ -47,6 +47,38 @@
                      placeholder="Exemple : Mon PC ne trouve aucun réseau Wi-Fi.">
               <button id="send" class="btn-orange" type="submit">Envoyer</button>
             </form>
+
+            <div class="chat-actions">
+              <button type="button" id="ticket-open" class="btn-outline"{% if not historique %} hidden{% endif %}>Créer un ticket</button>
+            </div>
+
+            <div id="ticket-panel" class="ticket-panel" hidden>
+              <h4>Créer un ticket</h4>
+              <p class="muted">Vérifiez le résumé avant de confirmer : il sera transmis à un technicien.</p>
+              <div class="form-field">
+                <label for="ticket-titre">Titre</label>
+                <input id="ticket-titre" maxlength="200">
+              </div>
+              <div class="form-field">
+                <label for="ticket-categorie">Catégorie</label>
+                <select id="ticket-categorie">
+                  {% for valeur, libelle in categories %}<option value="{{ valeur }}">{{ libelle }}</option>{% endfor %}
+                </select>
+              </div>
+              <div class="form-field">
+                <label for="ticket-description">Description du problème</label>
+                <textarea id="ticket-description" rows="3" maxlength="5000"></textarea>
+              </div>
+              <div class="form-field">
+                <label for="ticket-essais">Étapes déjà essayées</label>
+                <textarea id="ticket-essais" rows="4" maxlength="5000"></textarea>
+              </div>
+              <div class="ticket-actions">
+                <button type="button" id="ticket-confirm" class="btn-orange">Confirmer la création</button>
+                <button type="button" id="ticket-cancel" class="btn-link">Annuler</button>
+              </div>
+              <p id="ticket-status" class="ticket-status" role="status"></p>
+            </div>
           </div>
         </div>
       </div>
@@ -112,6 +144,7 @@
 <script>
   const CSRF = "{{ csrf_token }}";
   const ASK_URL = "{% url 'assistant:ask' %}";
+  const TICKET_URL = "{% url 'tickets:creer' %}";
   const LOGIN_URL = "{% url 'login' %}";
   let conversationId = {{ courante.pk|default:"null" }};
 
@@ -188,6 +221,8 @@
         pending.className = "bubble bubble-bot"
           + (data.type === "clarification" ? " bubble-clarification" : "");
         pending.innerHTML = renderAnswer(data);
+        ticketOpen.hidden = false;
+        ticketOpen.classList.toggle("btn-highlight", Boolean(data.ticket_suggere));
         if (conversationId === null) {
           conversationId = data.conversation_id;
           history.replaceState(null, "", "?conversation=" + conversationId);
@@ -200,6 +235,90 @@
     } finally {
       sendBtn.disabled = false;
       input.focus();
+    }
+  });
+
+  /* --- Création de ticket : résumé, confirmation, appel MCP côté serveur --- */
+  const ticketOpen = document.getElementById("ticket-open");
+  const ticketPanel = document.getElementById("ticket-panel");
+  const ticketConfirm = document.getElementById("ticket-confirm");
+  const ticketStatus = document.getElementById("ticket-status");
+  let cleCreation = null;
+
+  function nouvelleCle() {
+    if (window.crypto && crypto.randomUUID) { return crypto.randomUUID(); }
+    return Date.now().toString(36) + Math.random().toString(36).slice(2, 12);
+  }
+
+  function texteBulle(bulle) {
+    // Copie détachée de la page : les <br> doivent être convertis à la main.
+    const copie = bulle.cloneNode(true);
+    copie.querySelectorAll(".sources").forEach(function (n) { n.remove(); });
+    copie.querySelectorAll("br").forEach(function (br) { br.replaceWith("\n"); });
+    return copie.textContent.trim();
+  }
+
+  function textes(selecteur) {
+    return Array.from(messages.querySelectorAll(selecteur)).map(texteBulle);
+  }
+
+  function etapesProposees() {
+    const reponses = textes(".bubble-bot:not(.bubble-error):not(.bubble-clarification)");
+    const derniere = reponses.length ? reponses[reponses.length - 1] : "";
+    const etapes = derniere.split("\n")
+      .filter(function (ligne) { return /^\d+\.\s/.test(ligne.trim()); })
+      .map(function (ligne) { return ligne.replace(/\s*\[S\d+\]/g, "").trim(); });
+    return etapes.length ? "Étapes proposées par FixIT :\n" + etapes.join("\n") : derniere;
+  }
+
+  ticketOpen.addEventListener("click", function () {
+    const questions = textes(".bubble-user");
+    const derniere = questions.length ? questions[questions.length - 1] : "";
+    document.getElementById("ticket-titre").value = derniere.slice(0, 200);
+    document.getElementById("ticket-description").value = questions.join("\n");
+    document.getElementById("ticket-essais").value = etapesProposees();
+    cleCreation = nouvelleCle();  // même clé si l'envoi est répété : pas de doublon
+    ticketStatus.textContent = "";
+    ticketStatus.className = "ticket-status";
+    ticketConfirm.disabled = false;
+    ticketPanel.hidden = false;
+    ticketPanel.scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+
+  document.getElementById("ticket-cancel").addEventListener("click", function () {
+    ticketPanel.hidden = true;
+  });
+
+  ticketConfirm.addEventListener("click", async function () {
+    ticketConfirm.disabled = true;
+    ticketStatus.className = "ticket-status";
+    ticketStatus.textContent = "Création du ticket en cours…";
+    try {
+      const response = await fetch(TICKET_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "X-CSRFToken": CSRF },
+        body: JSON.stringify({
+          titre: document.getElementById("ticket-titre").value,
+          categorie: document.getElementById("ticket-categorie").value,
+          description: document.getElementById("ticket-description").value,
+          essais: document.getElementById("ticket-essais").value,
+          cle_creation: cleCreation,
+        }),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        ticketStatus.className = "ticket-status erreur";
+        ticketStatus.textContent = data.error || "La création a échoué.";
+        ticketConfirm.disabled = false;
+        return;
+      }
+      ticketStatus.className = "ticket-status ok";
+      ticketStatus.innerHTML = "Ticket n° " + data.id + " enregistré — statut : "
+        + escapeHtml(data.statut) + '. <a href="' + data.url + '">Voir le ticket</a>';
+    } catch (error) {
+      ticketStatus.className = "ticket-status erreur";
+      ticketStatus.textContent = "Erreur réseau. Vous pouvez réessayer sans risque de doublon.";
+      ticketConfirm.disabled = false;
     }
   });
 </script>

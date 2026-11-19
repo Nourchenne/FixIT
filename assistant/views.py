@@ -7,6 +7,8 @@ from django.http import Http404, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.http import require_POST
 
+from tickets.models import Ticket
+
 from .models import Conversation, Message
 
 
@@ -37,6 +39,7 @@ def chat_page(request):
         "conversations": conversations,
         "courante": courante,
         "historique": historique,
+        "categories": Ticket.Categorie.choices,
     })
 
 
@@ -98,9 +101,14 @@ def ask(request):
             return _erreur("Conversation introuvable.", 404)
 
     from assistant.services.chat import answer_question
+    from assistant.services.outils import concerne_un_ticket, repondre_sur_ticket
 
     try:
-        result = answer_question(question_avec_contexte(conversation, question))
+        if concerne_un_ticket(question):
+            # Suivi d'un ticket : tool calling + serveur MCP.
+            result = repondre_sur_ticket(question, request.user)
+        else:
+            result = answer_question(question_avec_contexte(conversation, question))
     except ValueError as erreur:
         # Configuration Groq manquante, réponse illisible…
         return _erreur(str(erreur), 400)

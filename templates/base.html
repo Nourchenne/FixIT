@@ -28,7 +28,10 @@
       <nav class="main-nav">
         {% if user.is_authenticated %}
           <a href="{% url 'assistant:chat' %}" class="{% block nav_assistant %}{% endblock %}">Assistant</a>
-          {% block nav_extra %}{% endblock %}
+          <a href="{% url 'tickets:liste' %}" class="{% block nav_tickets %}{% endblock %}">Mes tickets</a>
+          {% if est_technicien %}
+            <a href="{% url 'tickets:technicien' %}" class="{% block nav_technicien %}{% endblock %}">Espace technicien</a>
+          {% endif %}
           <span class="nav-user">{{ user.get_username }}</span>
           <form method="post" action="{% url 'logout' %}" class="nav-logout">
             {% csrf_token %}
@@ -40,6 +43,14 @@
       </nav>
     </div>
   </header>
+
+  {% if messages %}
+    <div class="container flash-zone">
+      {% for message in messages %}
+        <div class="flash flash-{{ message.tags }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
 
   {% block content %}{% endblock %}
 
@@ -68,6 +79,8 @@
           <ul>
             {% if user.is_authenticated %}
               <li><a href="{% url 'assistant:chat' %}">Assistant de dépannage</a></li>
+              <li><a href="{% url 'tickets:liste' %}">Mes tickets</a></li>
+              {% if est_technicien %}<li><a href="{% url 'tickets:technicien' %}">Espace technicien</a></li>{% endif %}
             {% else %}
               <li><a href="{% url 'login' %}">Connexion</a></li>
             {% endif %}
