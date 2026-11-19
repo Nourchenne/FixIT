@@ -1,0 +1,12 @@
+{
+  "date_utc": "20261119_153419",
+  "questions": 50,
+  "erreurs": 0,
+  "langue_correcte_pct": 92.0,
+  "repondables_guide_attendu_cite_pct": 77.5,
+  "repondables_sans_etapes": 3,
+  "hors_corpus_repli_correct_pct": 100.0,
+  "duree_mediane_s": 9.63,
+  "duree_max_s": 49.02,
+  "remarque": "F027 relancée seule après une erreur de connexion à Groq (APIConnectionError)."
+}
