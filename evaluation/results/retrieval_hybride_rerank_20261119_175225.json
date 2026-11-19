@@ -1,0 +1,2802 @@
+{
+  "date_utc": "2026-11-19T17:52:25+00:00",
+  "config": "hybride_rerank",
+  "limit": 10,
+  "summary": {
+    "recall@5": 0.825,
+    "recall@10": 0.9,
+    "mrr@10": 0.6934,
+    "n_answerable": 40
+  },
+  "by_lang": {
+    "fr": {
+      "n": 20,
+      "recall@5": 0.8,
+      "recall@10": 0.9,
+      "mrr@10": 0.7255
+    },
+    "en": {
+      "n": 20,
+      "recall@5": 0.85,
+      "recall@10": 0.9,
+      "mrr@10": 0.6613
+    }
+  },
+  "by_cas": {
+    "PC01": {
+      "n": 4,
+      "recall@5": 0.5,
+      "recall@10": 0.5,
+      "mrr@10": 0.3333
+    },
+    "PC02": {
+      "n": 4,
+      "recall@5": 1.0,
+      "recall@10": 1.0,
+      "mrr@10": 0.6125
+    },
+    "PC03": {
+      "n": 4,
+      "recall@5": 0.75,
+      "recall@10": 0.75,
+      "mrr@10": 0.5
+    },
+    "PER01": {
+      "n": 4,
+      "recall@5": 1.0,
+      "recall@10": 1.0,
+      "mrr@10": 0.75
+    },
+    "PER02": {
+      "n": 4,
+      "recall@5": 0.75,
+      "recall@10": 0.75,
+      "mrr@10": 0.75
+    },
+    "PER03": {
+      "n": 4,
+      "recall@5": 0.25,
+      "recall@10": 1.0,
+      "mrr@10": 0.2381
+    },
+    "NET01": {
+      "n": 4,
+      "recall@5": 1.0,
+      "recall@10": 1.0,
+      "mrr@10": 0.75
+    },
+    "NET02": {
+      "n": 4,
+      "recall@5": 1.0,
+      "recall@10": 1.0,
+      "mrr@10": 1.0
+    },
+    "NET03": {
+      "n": 4,
+      "recall@5": 1.0,
+      "recall@10": 1.0,
+      "mrr@10": 1.0
+    },
+    "NET04": {
+      "n": 4,
+      "recall@5": 1.0,
+      "recall@10": 1.0,
+      "mrr@10": 1.0
+    }
+  },
+  "hors_corpus": {
+    "n": 10,
+    "top_score_moyen": 0.2994,
+    "top_score_max": 0.5,
+    "rappel_top_score_moyen_repondables": 0.4245
+  },
+  "details": [
+    {
+      "query_id": "F001",
+      "lang": "fr",
+      "cas": "PC01",
+      "question": "Windows met très longtemps à démarrer le matin.",
+      "gold_doc_ids": [
+        "DOC005",
+        "DOC004"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC035",
+          "page": 1,
+          "score": 0.1667
+        },
+        {
+          "doc_id": "DOC008",
+          "page": 1,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 4,
+          "score": 0.45
+        },
+        {
+          "doc_id": "DOC038",
+          "page": 1,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC037",
+          "page": 3,
+          "score": 0.2
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 3,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 5,
+          "score": 0.1667
+        },
+        {
+          "doc_id": "DOC008",
+          "page": 3,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 5,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC027",
+          "page": 3,
+          "score": 0.1429
+        }
+      ],
+      "first_relevant_rank": 0,
+      "reciprocal_rank": 0.0,
+      "hit@5": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "query_id": "F002",
+      "lang": "en",
+      "cas": "PC01",
+      "question": "My PC takes forever to boot up.",
+      "gold_doc_ids": [
+        "DOC005",
+        "DOC004"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC027",
+          "page": 2,
+          "score": 0.2
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 4,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC044",
+          "page": 6,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC044",
+          "page": 2,
+          "score": 0.1667
+        },
+        {
+          "doc_id": "DOC018",
+          "page": 1,
+          "score": 0.1667
+        },
+        {
+          "doc_id": "DOC042",
+          "page": 2,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC042",
+          "page": 4,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC042",
+          "page": 2,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC042",
+          "page": 4,
+          "score": 0.2
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.25
+        }
+      ],
+      "first_relevant_rank": 0,
+      "reciprocal_rank": 0.0,
+      "hit@5": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "query_id": "F003",
+      "lang": "fr",
+      "cas": "PC01",
+      "question": "Le processeur de mon PC est constamment à 100 %.",
+      "gold_doc_ids": [
+        "DOC035",
+        "DOC004"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC035",
+          "page": 1,
+          "score": 0.4762
+        },
+        {
+          "doc_id": "DOC036",
+          "page": 1,
+          "score": 0.75
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 6,
+          "score": 0.2255
+        },
+        {
+          "doc_id": "DOC031",
+          "page": 2,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 7,
+          "score": 0.2
+        },
+        {
+          "doc_id": "DOC039",
+          "page": 1,
+          "score": 0.2
+        },
+        {
+          "doc_id": "DOC038",
+          "page": 1,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC005",
+          "page": 2,
+          "score": 0.2917
+        },
+        {
+          "doc_id": "DOC004",
+          "page": 2,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC004",
+          "page": 4,
+          "score": 0.2198
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "F004",
+      "lang": "en",
+      "cas": "PC01",
+      "question": "My laptop is sluggish and programs take ages to open.",
+      "gold_doc_ids": [
+        "DOC004",
+        "DOC036"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC044",
+          "page": 2,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC005",
+          "page": 2,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC004",
+          "page": 2,
+          "score": 0.1667
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 3,
+          "score": 0.125
+        },
+        {
+          "doc_id": "DOC027",
+          "page": 4,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 5,
+          "score": 0.1111
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 2,
+          "score": 0.1429
+        },
+        {
+          "doc_id": "DOC026",
+          "page": 2,
+          "score": 0.2
+        },
+        {
+          "doc_id": "DOC031",
+          "page": 2,
+          "score": 0.1
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.3333
+        }
+      ],
+      "first_relevant_rank": 3,
+      "reciprocal_rank": 0.3333,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "F005",
+      "lang": "fr",
+      "cas": "PC02",
+      "question": "Word ne répond plus et je n'arrive pas à le fermer.",
+      "gold_doc_ids": [
+        "DOC029",
+        "DOC006"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC029",
+          "page": 1,
+          "score": 0.8333
+        },
+        {
+          "doc_id": "DOC026",
+          "page": 2,
+          "score": 0.1667
+        },
+        {
+          "doc_id": "DOC007",
+          "page": 1,
+          "score": 0.2769
+        },
+        {
+          "doc_id": "DOC032",
+          "page": 1,
+          "score": 0.1429
+        },
+        {
+          "doc_id": "DOC026",
+          "page": 3,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 1,
+          "score": 0.2
+        },
+        {
+          "doc_id": "DOC018",
+          "page": 1,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC022",
+          "page": 1,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC034",
+          "page": 1,
+          "score": 0.1667
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.5
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "F006",
+      "lang": "en",
+      "cas": "PC02",
+      "question": "A Windows app won't launch at all.",
+      "gold_doc_ids": [
+        "DOC006",
+        "DOC007"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC005",
+          "page": 2,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC035",
+          "page": 1,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC027",
+          "page": 3,
+          "score": 0.2556
+        },
+        {
+          "doc_id": "DOC007",
+          "page": 1,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 3,
+          "score": 0.2556
+        },
+        {
+          "doc_id": "DOC027",
+          "page": 2,
+          "score": 0.1667
+        },
+        {
+          "doc_id": "DOC027",
+          "page": 1,
+          "score": 0.1825
+        },
+        {
+          "doc_id": "DOC015",
+          "page": 2,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC015",
+          "page": 2,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 7,
+          "score": 0.25
+        }
+      ],
+      "first_relevant_rank": 4,
+      "reciprocal_rank": 0.25,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "F007",
+      "lang": "fr",
+      "cas": "PC02",
+      "question": "Une application plante dès que je l'ouvre.",
+      "gold_doc_ids": [
+        "DOC006",
+        "DOC007"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC005",
+          "page": 2,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC027",
+          "page": 1,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC005",
+          "page": 2,
+          "score": 0.1778
+        },
+        {
+          "doc_id": "DOC005",
+          "page": 3,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC006",
+          "page": 1,
+          "score": 0.2
+        },
+        {
+          "doc_id": "DOC045",
+          "page": 1,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC008",
+          "page": 1,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC025",
+          "page": 6,
+          "score": 0.1667
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 7,
+          "score": 0.2
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 8,
+          "score": 0.3333
+        }
+      ],
+      "first_relevant_rank": 5,
+      "reciprocal_rank": 0.2,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "F008",
+      "lang": "en",
+      "cas": "PC02",
+      "question": "How do I force quit a frozen program on Windows?",
+      "gold_doc_ids": [
+        "DOC029"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC029",
+          "page": 1,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC029",
+          "page": 1,
+          "score": 0.75
+        },
+        {
+          "doc_id": "DOC004",
+          "page": 2,
+          "score": 0.1667
+        },
+        {
+          "doc_id": "DOC004",
+          "page": 3,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC044",
+          "page": 12,
+          "score": 0.2
+        },
+        {
+          "doc_id": "DOC041",
+          "page": 2,
+          "score": 0.1637
+        },
+        {
+          "doc_id": "DOC005",
+          "page": 2,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC016",
+          "page": 1,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC027",
+          "page": 3,
+          "score": 0.2
+        },
+        {
+          "doc_id": "DOC027",
+          "page": 2,
+          "score": 0.1667
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "F009",
+      "lang": "fr",
+      "cas": "PC03",
+      "question": "Windows affiche que mon disque est presque plein.",
+      "gold_doc_ids": [
+        "DOC008",
+        "DOC009"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC008",
+          "page": 1,
+          "score": 0.6111
+        },
+        {
+          "doc_id": "DOC008",
+          "page": 3,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC008",
+          "page": 1,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 5,
+          "score": 0.2429
+        },
+        {
+          "doc_id": "DOC008",
+          "page": 2,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 3,
+          "score": 0.3088
+        },
+        {
+          "doc_id": "DOC036",
+          "page": 1,
+          "score": 0.1825
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 7,
+          "score": 0.2
+        },
+        {
+          "doc_id": "DOC044",
+          "page": 6,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC004",
+          "page": 2,
+          "score": 0.2909
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "F010",
+      "lang": "en",
+      "cas": "PC03",
+      "question": "How do I clean up temporary files to free space?",
+      "gold_doc_ids": [
+        "DOC008",
+        "DOC009"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC004",
+          "page": 2,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC008",
+          "page": 2,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC004",
+          "page": 2,
+          "score": 0.1667
+        },
+        {
+          "doc_id": "DOC009",
+          "page": 2,
+          "score": 0.125
+        },
+        {
+          "doc_id": "DOC009",
+          "page": 1,
+          "score": 0.2
+        },
+        {
+          "doc_id": "DOC008",
+          "page": 1,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC008",
+          "page": 4,
+          "score": 0.4048
+        },
+        {
+          "doc_id": "DOC027",
+          "page": 4,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC008",
+          "page": 2,
+          "score": 0.1429
+        },
+        {
+          "doc_id": "DOC009",
+          "page": 2,
+          "score": 0.25
+        }
+      ],
+      "first_relevant_rank": 2,
+      "reciprocal_rank": 0.5,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "F011",
+      "lang": "fr",
+      "cas": "PC03",
+      "question": "Comment activer le nettoyage automatique du disque ?",
+      "gold_doc_ids": [
+        "DOC009",
+        "DOC008"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC004",
+          "page": 2,
+          "score": 1.0
+        },
+        {
+          "doc_id": "DOC008",
+          "page": 2,
+          "score": 0.45
+        },
+        {
+          "doc_id": "DOC005",
+          "page": 2,
+          "score": 0.45
+        },
+        {
+          "doc_id": "DOC009",
+          "page": 1,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC009",
+          "page": 3,
+          "score": 0.2917
+        },
+        {
+          "doc_id": "DOC009",
+          "page": 2,
+          "score": 0.202
+        },
+        {
+          "doc_id": "DOC008",
+          "page": 4,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 8,
+          "score": 0.2143
+        },
+        {
+          "doc_id": "DOC004",
+          "page": 2,
+          "score": 0.2917
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 7,
+          "score": 0.202
+        }
+      ],
+      "first_relevant_rank": 2,
+      "reciprocal_rank": 0.5,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "F012",
+      "lang": "en",
+      "cas": "PC03",
+      "question": "My laptop warns there is not enough storage to update.",
+      "gold_doc_ids": [
+        "DOC008",
+        "DOC009"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC028",
+          "page": 6,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 4,
+          "score": 0.2556
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 5,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 3,
+          "score": 0.5833
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 4,
+          "score": 0.2054
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 2,
+          "score": 0.2
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 3,
+          "score": 0.2054
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 5,
+          "score": 0.5556
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 1,
+          "score": 0.1667
+        },
+        {
+          "doc_id": "DOC016",
+          "page": 1,
+          "score": 0.25
+        }
+      ],
+      "first_relevant_rank": 0,
+      "reciprocal_rank": 0.0,
+      "hit@5": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "query_id": "F013",
+      "lang": "fr",
+      "cas": "PER01",
+      "question": "Le son de mon casque ne marche pas sur Windows.",
+      "gold_doc_ids": [
+        "DOC010",
+        "DOC020"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC020",
+          "page": 1,
+          "score": 0.225
+        },
+        {
+          "doc_id": "DOC011",
+          "page": 2,
+          "score": 0.5833
+        },
+        {
+          "doc_id": "DOC011",
+          "page": 1,
+          "score": 0.5588
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 2,
+          "score": 0.2
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 5,
+          "score": 0.3269
+        },
+        {
+          "doc_id": "DOC011",
+          "page": 1,
+          "score": 0.3667
+        },
+        {
+          "doc_id": "DOC020",
+          "page": 1,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 1,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC011",
+          "page": 1,
+          "score": 0.2111
+        },
+        {
+          "doc_id": "DOC043",
+          "page": 1,
+          "score": 0.3333
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "F014",
+      "lang": "en",
+      "cas": "PER01",
+      "question": "No audio from my laptop after the last update.",
+      "gold_doc_ids": [
+        "DOC010",
+        "DOC012"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC020",
+          "page": 1,
+          "score": 0.2159
+        },
+        {
+          "doc_id": "DOC012",
+          "page": 2,
+          "score": 0.3167
+        },
+        {
+          "doc_id": "DOC012",
+          "page": 1,
+          "score": 0.5833
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 6,
+          "score": 0.381
+        },
+        {
+          "doc_id": "DOC011",
+          "page": 2,
+          "score": 0.2436
+        },
+        {
+          "doc_id": "DOC012",
+          "page": 1,
+          "score": 0.5833
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 4,
+          "score": 0.325
+        },
+        {
+          "doc_id": "DOC020",
+          "page": 1,
+          "score": 0.6111
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 5,
+          "score": 0.2556
+        },
+        {
+          "doc_id": "DOC042",
+          "page": 5,
+          "score": 0.1667
+        }
+      ],
+      "first_relevant_rank": 2,
+      "reciprocal_rank": 0.5,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "F015",
+      "lang": "fr",
+      "cas": "PER01",
+      "question": "Windows ne détecte plus mes haut-parleurs.",
+      "gold_doc_ids": [
+        "DOC020",
+        "DOC010"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC020",
+          "page": 1,
+          "score": 0.2917
+        },
+        {
+          "doc_id": "DOC011",
+          "page": 2,
+          "score": 0.4
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 3,
+          "score": 0.7
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 5,
+          "score": 0.225
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 1,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 2,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC020",
+          "page": 1,
+          "score": 0.2976
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 1,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 3,
+          "score": 0.1667
+        },
+        {
+          "doc_id": "DOC044",
+          "page": 6,
+          "score": 0.2
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "F016",
+      "lang": "en",
+      "cas": "PER01",
+      "question": "How do I reinstall my audio driver on Windows?",
+      "gold_doc_ids": [
+        "DOC012",
+        "DOC010"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC011",
+          "page": 2,
+          "score": 0.5667
+        },
+        {
+          "doc_id": "DOC012",
+          "page": 2,
+          "score": 0.5833
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 5,
+          "score": 0.2083
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 5,
+          "score": 0.2167
+        },
+        {
+          "doc_id": "DOC020",
+          "page": 1,
+          "score": 0.2679
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 4,
+          "score": 0.2625
+        },
+        {
+          "doc_id": "DOC012",
+          "page": 1,
+          "score": 0.2576
+        },
+        {
+          "doc_id": "DOC012",
+          "page": 2,
+          "score": 0.3929
+        },
+        {
+          "doc_id": "DOC020",
+          "page": 1,
+          "score": 0.5526
+        },
+        {
+          "doc_id": "DOC020",
+          "page": 2,
+          "score": 0.4167
+        }
+      ],
+      "first_relevant_rank": 2,
+      "reciprocal_rank": 0.5,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "F017",
+      "lang": "fr",
+      "cas": "PER02",
+      "question": "Personne ne m'entend pendant mes réunions en ligne.",
+      "gold_doc_ids": [
+        "DOC011"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC028",
+          "page": 1,
+          "score": 0.2
+        },
+        {
+          "doc_id": "DOC026",
+          "page": 3,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC015",
+          "page": 1,
+          "score": 0.1667
+        },
+        {
+          "doc_id": "DOC025",
+          "page": 1,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 1,
+          "score": 0.1667
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 2,
+          "score": 0.4
+        },
+        {
+          "doc_id": "DOC009",
+          "page": 2,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC009",
+          "page": 3,
+          "score": 0.2
+        },
+        {
+          "doc_id": "DOC009",
+          "page": 2,
+          "score": 0.5
+        }
+      ],
+      "first_relevant_rank": 0,
+      "reciprocal_rank": 0.0,
+      "hit@5": 0.0,
+      "hit@10": 0.0
+    },
+    {
+      "query_id": "F018",
+      "lang": "en",
+      "cas": "PER02",
+      "question": "My headset mic is not picked up by Windows.",
+      "gold_doc_ids": [
+        "DOC011"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC011",
+          "page": 2,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC011",
+          "page": 1,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC011",
+          "page": 1,
+          "score": 0.2
+        },
+        {
+          "doc_id": "DOC020",
+          "page": 1,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC011",
+          "page": 2,
+          "score": 0.1667
+        },
+        {
+          "doc_id": "DOC008",
+          "page": 2,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC027",
+          "page": 1,
+          "score": 0.2
+        },
+        {
+          "doc_id": "DOC027",
+          "page": 2,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC027",
+          "page": 3,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 1,
+          "score": 0.1667
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "F019",
+      "lang": "fr",
+      "cas": "PER02",
+      "question": "Comment autoriser le microphone pour une application ?",
+      "gold_doc_ids": [
+        "DOC011"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC011",
+          "page": 1,
+          "score": 1.0
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 7,
+          "score": 0.6667
+        },
+        {
+          "doc_id": "DOC011",
+          "page": 1,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC025",
+          "page": 2,
+          "score": 0.1714
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 7,
+          "score": 0.3095
+        },
+        {
+          "doc_id": "DOC011",
+          "page": 1,
+          "score": 0.4
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 2,
+          "score": 0.2054
+        },
+        {
+          "doc_id": "DOC025",
+          "page": 1,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC011",
+          "page": 2,
+          "score": 0.2436
+        },
+        {
+          "doc_id": "DOC011",
+          "page": 2,
+          "score": 0.1623
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "F020",
+      "lang": "en",
+      "cas": "PER02",
+      "question": "Windows does not detect my microphone at all.",
+      "gold_doc_ids": [
+        "DOC011"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC011",
+          "page": 2,
+          "score": 0.4583
+        },
+        {
+          "doc_id": "DOC011",
+          "page": 1,
+          "score": 1.0
+        },
+        {
+          "doc_id": "DOC020",
+          "page": 1,
+          "score": 0.2
+        },
+        {
+          "doc_id": "DOC011",
+          "page": 2,
+          "score": 0.3111
+        },
+        {
+          "doc_id": "DOC011",
+          "page": 1,
+          "score": 0.4167
+        },
+        {
+          "doc_id": "DOC011",
+          "page": 1,
+          "score": 0.5833
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 7,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC010",
+          "page": 7,
+          "score": 0.2857
+        },
+        {
+          "doc_id": "DOC019",
+          "page": 1,
+          "score": 0.125
+        },
+        {
+          "doc_id": "DOC012",
+          "page": 1,
+          "score": 0.1111
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "F021",
+      "lang": "fr",
+      "cas": "PER03",
+      "question": "Mon clavier externe ne répond plus après la mise en veille.",
+      "gold_doc_ids": [
+        "DOC013"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC008",
+          "page": 2,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC029",
+          "page": 1,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC026",
+          "page": 2,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 2,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 1,
+          "score": 0.2
+        },
+        {
+          "doc_id": "DOC013",
+          "page": 2,
+          "score": 0.6429
+        },
+        {
+          "doc_id": "DOC033",
+          "page": 2,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC025",
+          "page": 8,
+          "score": 0.1667
+        },
+        {
+          "doc_id": "DOC025",
+          "page": 2,
+          "score": 0.2
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.3333
+        }
+      ],
+      "first_relevant_rank": 6,
+      "reciprocal_rank": 0.1667,
+      "hit@5": 0.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "F022",
+      "lang": "en",
+      "cas": "PER03",
+      "question": "My touchpad stopped working on my laptop.",
+      "gold_doc_ids": [
+        "DOC016",
+        "DOC013"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC010",
+          "page": 5,
+          "score": 0.1
+        },
+        {
+          "doc_id": "DOC025",
+          "page": 10,
+          "score": 0.1667
+        },
+        {
+          "doc_id": "DOC026",
+          "page": 2,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC026",
+          "page": 2,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC044",
+          "page": 7,
+          "score": 0.2
+        },
+        {
+          "doc_id": "DOC044",
+          "page": 11,
+          "score": 0.1111
+        },
+        {
+          "doc_id": "DOC013",
+          "page": 1,
+          "score": 0.125
+        },
+        {
+          "doc_id": "DOC044",
+          "page": 5,
+          "score": 0.1429
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 5,
+          "score": 0.0909
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.3333
+        }
+      ],
+      "first_relevant_rank": 7,
+      "reciprocal_rank": 0.1429,
+      "hit@5": 0.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "F023",
+      "lang": "fr",
+      "cas": "PER03",
+      "question": "Ma souris Bluetooth n'est pas reconnue par Windows.",
+      "gold_doc_ids": [
+        "DOC024",
+        "DOC013"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC018",
+          "page": 1,
+          "score": 1.0
+        },
+        {
+          "doc_id": "DOC043",
+          "page": 1,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 4,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC019",
+          "page": 1,
+          "score": 0.386
+        },
+        {
+          "doc_id": "DOC017",
+          "page": 1,
+          "score": 0.2625
+        },
+        {
+          "doc_id": "DOC019",
+          "page": 2,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC024",
+          "page": 1,
+          "score": 0.3
+        },
+        {
+          "doc_id": "DOC016",
+          "page": 2,
+          "score": 0.1667
+        },
+        {
+          "doc_id": "DOC024",
+          "page": 1,
+          "score": 0.1611
+        },
+        {
+          "doc_id": "DOC024",
+          "page": 2,
+          "score": 0.35
+        }
+      ],
+      "first_relevant_rank": 7,
+      "reciprocal_rank": 0.1429,
+      "hit@5": 0.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "F024",
+      "lang": "en",
+      "cas": "PER03",
+      "question": "Some keys on my keyboard are not working in Windows.",
+      "gold_doc_ids": [
+        "DOC013"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC026",
+          "page": 2,
+          "score": 0.1667
+        },
+        {
+          "doc_id": "DOC013",
+          "page": 2,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 5,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 3,
+          "score": 0.2667
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 6,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC008",
+          "page": 2,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC027",
+          "page": 1,
+          "score": 0.2
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 1,
+          "score": 0.1667
+        },
+        {
+          "doc_id": "DOC027",
+          "page": 3,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC027",
+          "page": 2,
+          "score": 0.3333
+        }
+      ],
+      "first_relevant_rank": 2,
+      "reciprocal_rank": 0.5,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "F025",
+      "lang": "fr",
+      "cas": "NET01",
+      "question": "La liste des réseaux Wi-Fi est vide sur mon portable.",
+      "gold_doc_ids": [
+        "DOC001",
+        "DOC003"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC015",
+          "page": 2,
+          "score": 0.2857
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 8,
+          "score": 0.8333
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 3,
+          "score": 0.625
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 1,
+          "score": 0.1667
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 2,
+          "score": 0.3667
+        },
+        {
+          "doc_id": "DOC002",
+          "page": 1,
+          "score": 0.2476
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 6,
+          "score": 0.5833
+        },
+        {
+          "doc_id": "DOC002",
+          "page": 2,
+          "score": 0.1576
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 7,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.1778
+        }
+      ],
+      "first_relevant_rank": 2,
+      "reciprocal_rank": 0.5,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "F026",
+      "lang": "en",
+      "cas": "NET01",
+      "question": "No Wi-Fi networks show up in the taskbar.",
+      "gold_doc_ids": [
+        "DOC001",
+        "DOC003"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC015",
+          "page": 1,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 8,
+          "score": 0.7
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 1,
+          "score": 0.1984
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 6,
+          "score": 0.3409
+        },
+        {
+          "doc_id": "DOC015",
+          "page": 2,
+          "score": 0.5667
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.2381
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 7,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 1,
+          "score": 0.1776
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.2
+        }
+      ],
+      "first_relevant_rank": 2,
+      "reciprocal_rank": 0.5,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "F027",
+      "lang": "fr",
+      "cas": "NET01",
+      "question": "Mon PC ne détecte pas le Wi-Fi alors que mon téléphone le voit.",
+      "gold_doc_ids": [
+        "DOC001",
+        "DOC003"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC001",
+          "page": 8,
+          "score": 1.0
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 1,
+          "score": 0.2
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.4762
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 4,
+          "score": 0.1678
+        },
+        {
+          "doc_id": "DOC045",
+          "page": 2,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC015",
+          "page": 2,
+          "score": 0.1667
+        },
+        {
+          "doc_id": "DOC002",
+          "page": 1,
+          "score": 0.2
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 6,
+          "score": 0.1917
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 5,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 3,
+          "score": 0.3958
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "F028",
+      "lang": "en",
+      "cas": "NET01",
+      "question": "Windows can't see my home wireless network.",
+      "gold_doc_ids": [
+        "DOC001",
+        "DOC003"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC001",
+          "page": 9,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 8,
+          "score": 0.2
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 7,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.1667
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC027",
+          "page": 2,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC027",
+          "page": 3,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 1,
+          "score": 0.1667
+        },
+        {
+          "doc_id": "DOC008",
+          "page": 2,
+          "score": 0.2
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "F029",
+      "lang": "fr",
+      "cas": "NET02",
+      "question": "Windows refuse mon mot de passe Wi-Fi alors qu'il est correct.",
+      "gold_doc_ids": [
+        "DOC001",
+        "DOC002",
+        "DOC003"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC002",
+          "page": 1,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 7,
+          "score": 0.5476
+        },
+        {
+          "doc_id": "DOC002",
+          "page": 2,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 5,
+          "score": 0.2
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.3409
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 8,
+          "score": 0.3095
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 7,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 2,
+          "score": 0.2262
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 4,
+          "score": 0.2
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.5
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "F030",
+      "lang": "en",
+      "cas": "NET02",
+      "question": "I select my Wi-Fi network but it won't connect.",
+      "gold_doc_ids": [
+        "DOC001",
+        "DOC002",
+        "DOC003"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC002",
+          "page": 1,
+          "score": 0.2625
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 2,
+          "score": 0.1875
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 8,
+          "score": 0.5833
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 1,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 1,
+          "score": 0.1955
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 7,
+          "score": 0.2
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 1.0
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 6,
+          "score": 0.1714
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "F031",
+      "lang": "fr",
+      "cas": "NET02",
+      "question": "Comment oublier puis reconnecter un réseau Wi-Fi ?",
+      "gold_doc_ids": [
+        "DOC002",
+        "DOC001"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC001",
+          "page": 2,
+          "score": 0.8333
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.7
+        },
+        {
+          "doc_id": "DOC002",
+          "page": 1,
+          "score": 0.2769
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 2,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC002",
+          "page": 1,
+          "score": 0.2429
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 6,
+          "score": 0.2019
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 3,
+          "score": 0.35
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 8,
+          "score": 0.4167
+        },
+        {
+          "doc_id": "DOC002",
+          "page": 2,
+          "score": 0.1944
+        },
+        {
+          "doc_id": "DOC043",
+          "page": 1,
+          "score": 0.1667
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "F032",
+      "lang": "en",
+      "cas": "NET02",
+      "question": "Connecting to Wi-Fi shows a 'can't connect to this network' error.",
+      "gold_doc_ids": [
+        "DOC001",
+        "DOC003"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC003",
+          "page": 1,
+          "score": 0.254
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 8,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC002",
+          "page": 1,
+          "score": 0.2143
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 1.0
+        },
+        {
+          "doc_id": "DOC015",
+          "page": 1,
+          "score": 0.2
+        },
+        {
+          "doc_id": "DOC015",
+          "page": 2,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.4
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 7,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 1,
+          "score": 0.2
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.25
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "F033",
+      "lang": "fr",
+      "cas": "NET03",
+      "question": "Mon Wi-Fi se déconnecte toutes les cinq minutes.",
+      "gold_doc_ids": [
+        "DOC001",
+        "DOC003"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC003",
+          "page": 1,
+          "score": 0.4167
+        },
+        {
+          "doc_id": "DOC015",
+          "page": 2,
+          "score": 0.5714
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 1,
+          "score": 0.2222
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 1,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC015",
+          "page": 3,
+          "score": 0.2429
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 8,
+          "score": 0.5909
+        },
+        {
+          "doc_id": "DOC002",
+          "page": 1,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC015",
+          "page": 2,
+          "score": 0.2909
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 4,
+          "score": 0.254
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 3,
+          "score": 0.25
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "F034",
+      "lang": "en",
+      "cas": "NET03",
+      "question": "My Wi-Fi keeps dropping randomly throughout the day.",
+      "gold_doc_ids": [
+        "DOC001",
+        "DOC003"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC003",
+          "page": 1,
+          "score": 0.3667
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 8,
+          "score": 0.5909
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 6,
+          "score": 0.325
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 4,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 7,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.225
+        },
+        {
+          "doc_id": "DOC002",
+          "page": 1,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 4,
+          "score": 0.2222
+        },
+        {
+          "doc_id": "DOC002",
+          "page": 1,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.3333
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "F035",
+      "lang": "fr",
+      "cas": "NET03",
+      "question": "La connexion sans fil est instable depuis la dernière mise à jour.",
+      "gold_doc_ids": [
+        "DOC001",
+        "DOC003"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC003",
+          "page": 2,
+          "score": 0.1667
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 8,
+          "score": 0.4
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 4,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 6,
+          "score": 0.2
+        },
+        {
+          "doc_id": "DOC013",
+          "page": 1,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 1,
+          "score": 0.2917
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 5,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 8,
+          "score": 0.2
+        },
+        {
+          "doc_id": "DOC015",
+          "page": 1,
+          "score": 0.25
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "F036",
+      "lang": "en",
+      "cas": "NET03",
+      "question": "Wi-Fi disconnects whenever my laptop wakes from sleep.",
+      "gold_doc_ids": [
+        "DOC001",
+        "DOC003"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC003",
+          "page": 2,
+          "score": 0.1769
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 8,
+          "score": 0.75
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 1,
+          "score": 0.5333
+        },
+        {
+          "doc_id": "DOC002",
+          "page": 1,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 2,
+          "score": 0.2143
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.3
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 6,
+          "score": 0.2679
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC002",
+          "page": 1,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 4,
+          "score": 0.2167
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "F037",
+      "lang": "fr",
+      "cas": "NET04",
+      "question": "Wi-Fi connecté mais aucune page web ne se charge.",
+      "gold_doc_ids": [
+        "DOC001",
+        "DOC003"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC001",
+          "page": 8,
+          "score": 0.7
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 6,
+          "score": 0.6667
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 1,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 1,
+          "score": 0.1429
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 1,
+          "score": 0.2667
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 1,
+          "score": 0.3333
+        },
+        {
+          "doc_id": "DOC002",
+          "page": 2,
+          "score": 0.4242
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 7,
+          "score": 0.2
+        },
+        {
+          "doc_id": "DOC002",
+          "page": 1,
+          "score": 0.15
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 2,
+          "score": 0.2338
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "F038",
+      "lang": "en",
+      "cas": "NET04",
+      "question": "Connected to Wi-Fi, no internet, yellow triangle on the icon.",
+      "gold_doc_ids": [
+        "DOC001",
+        "DOC003"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC001",
+          "page": 1,
+          "score": 0.2778
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 1,
+          "score": 0.2917
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 6,
+          "score": 0.3409
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 8,
+          "score": 0.8333
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 2,
+          "score": 0.2769
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 1,
+          "score": 0.5833
+        },
+        {
+          "doc_id": "DOC002",
+          "page": 2,
+          "score": 0.5526
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 4,
+          "score": 0.1611
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 1,
+          "score": 0.2679
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 7,
+          "score": 0.2526
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "F039",
+      "lang": "fr",
+      "cas": "NET04",
+      "question": "J'ai le Wi-Fi mais Internet ne fonctionne pas, que faire ?",
+      "gold_doc_ids": [
+        "DOC001",
+        "DOC003"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC003",
+          "page": 4,
+          "score": 0.3889
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 1,
+          "score": 0.2292
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 8,
+          "score": 0.45
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 6,
+          "score": 0.5588
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 1,
+          "score": 0.3111
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 4,
+          "score": 0.202
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 2,
+          "score": 0.2679
+        },
+        {
+          "doc_id": "DOC002",
+          "page": 2,
+          "score": 0.25
+        },
+        {
+          "doc_id": "DOC028",
+          "page": 1,
+          "score": 0.4333
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    },
+    {
+      "query_id": "F040",
+      "lang": "en",
+      "cas": "NET04",
+      "question": "Wi-Fi shows 'no internet, secured' on Windows.",
+      "gold_doc_ids": [
+        "DOC001",
+        "DOC003"
+      ],
+      "retrieved": [
+        {
+          "doc_id": "DOC001",
+          "page": 6,
+          "score": 0.4242
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 1,
+          "score": 0.4167
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 8,
+          "score": 0.325
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 7,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 1,
+          "score": 0.2667
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 1,
+          "score": 0.2361
+        },
+        {
+          "doc_id": "DOC015",
+          "page": 2,
+          "score": 0.4167
+        },
+        {
+          "doc_id": "DOC002",
+          "page": 2,
+          "score": 0.5
+        },
+        {
+          "doc_id": "DOC001",
+          "page": 2,
+          "score": 0.2017
+        },
+        {
+          "doc_id": "DOC003",
+          "page": 3,
+          "score": 0.25
+        }
+      ],
+      "first_relevant_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit@5": 1.0,
+      "hit@10": 1.0
+    }
+  ],
+  "hors_corpus_details": [
+    {
+      "query_id": "F041",
+      "lang": "fr",
+      "question": "Quelle est la capitale du Canada ?",
+      "top_score": 0.5,
+      "top_doc_id": "DOC028"
+    },
+    {
+      "query_id": "F042",
+      "lang": "en",
+      "question": "What's the best way to learn Spanish?",
+      "top_score": 0.125,
+      "top_doc_id": "DOC010"
+    },
+    {
+      "query_id": "F043",
+      "lang": "fr",
+      "question": "Comment changer un pneu crevé sur ma voiture ?",
+      "top_score": 0.5,
+      "top_doc_id": "DOC018"
+    },
+    {
+      "query_id": "F044",
+      "lang": "en",
+      "question": "Give me a recipe for chocolate chip cookies.",
+      "top_score": 0.25,
+      "top_doc_id": "DOC028"
+    },
+    {
+      "query_id": "F045",
+      "lang": "fr",
+      "question": "Quels sont les symptômes de la grippe ?",
+      "top_score": 0.2,
+      "top_doc_id": "DOC039"
+    },
+    {
+      "query_id": "F046",
+      "lang": "en",
+      "question": "How do I invest in the stock market?",
+      "top_score": 0.5,
+      "top_doc_id": "DOC009"
+    },
+    {
+      "query_id": "F047",
+      "lang": "fr",
+      "question": "Quel temps fera-t-il demain à Tunis ?",
+      "top_score": 0.25,
+      "top_doc_id": "DOC038"
+    },
+    {
+      "query_id": "F048",
+      "lang": "en",
+      "question": "Write a short poem about the ocean.",
+      "top_score": 0.1,
+      "top_doc_id": "DOC033"
+    },
+    {
+      "query_id": "F049",
+      "lang": "fr",
+      "question": "Comment fixer une étagère au mur ?",
+      "top_score": 0.2361,
+      "top_doc_id": "DOC026"
+    },
+    {
+      "query_id": "F050",
+      "lang": "en",
+      "question": "What is the population of Japan?",
+      "top_score": 0.3333,
+      "top_doc_id": "DOC033"
+    }
+  ]
+}
