@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block title %}FixIT — Ticket #{{ ticket.pk }}{% endblock %}
+{% block nav_tickets %}{% if not technicien %}active{% endif %}{% endblock %}
+{% block nav_technicien %}{% if technicien %}active{% endif %}{% endblock %}
+
+{% block content %}
+<section class="hero hero-compact">
+  <div class="container">
+    <h1>Ticket #{{ ticket.pk }} — {{ ticket.titre }}</h1>
+    <p>
+      <span class="badge badge-{{ ticket.statut }} badge-hero">{{ ticket.get_statut_display }}</span>
+      {{ ticket.get_categorie_display }} · créé le {{ ticket.cree_le|date:"d/m/Y à H:i" }}
+    </p>
+  </div>
+</section>
+
+<section class="section app-section">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-8">
+        <div class="panel">
+          <h2 class="panel-title">Problème signalé</h2>
+          <p class="pre">{{ ticket.description }}</p>
+          <h2 class="panel-title">Étapes déjà essayées</h2>
+          <p class="pre">{{ ticket.essais|default:"Non renseigné." }}</p>
+        </div>
+
+        <div class="panel">
+          <h2 class="panel-title">Historique</h2>
+          <ol class="timeline">
+            {% for evenement in evenements %}
+              <li>
+                <div class="timeline-head">
+                  <strong>{{ evenement.auteur.get_username|default:"Système" }}</strong>
+                  <span>{{ evenement.cree_le|date:"d/m/Y H:i" }}</span>
+                </div>
+                {% if evenement.nouveau_statut %}
+                  <div class="timeline-status">
+                    {% if evenement.ancien_statut %}<span class="badge badge-{{ evenement.ancien_statut }}">{{ evenement.ancien_libelle }}</span> &rarr; {% endif %}
+                    <span class="badge badge-{{ evenement.nouveau_statut }}">{{ evenement.nouveau_libelle }}</span>
+                  </div>
+                {% endif %}
+                {% if evenement.note %}<p class="pre">{{ evenement.note }}</p>{% endif %}
+              </li>
+            {% endfor %}
+          </ol>
+        </div>
+      </div>
+
+      <aside class="col-lg-4">
+        <div class="panel">
+          <h2 class="panel-title">Informations</h2>
+          <dl class="infos">
+            <dt>Demandeur</dt><dd>{{ ticket.proprietaire.get_username }}</dd>
+            <dt>Technicien</dt><dd>{{ ticket.technicien.get_username|default:"Non affecté" }}</dd>
+            <dt>Dernière mise à jour</dt><dd>{{ ticket.maj_le|date:"d/m/Y H:i" }}</dd>
+          </dl>
+        </div>
+
+        {% if technicien %}
+          <div class="panel">
+            <h2 class="panel-title">Traiter le ticket</h2>
+            <form method="post" action="{% url 'tickets:traiter' ticket.pk %}">
+              {% csrf_token %}
+              <div class="form-field">
+                <label for="statut">Nouveau statut</label>
+                <select id="statut" name="statut">
+                  <option value="">Ne pas changer (note seule)</option>
+                  {% for valeur, libelle in transitions %}
+                    <option value="{{ valeur }}">{{ libelle }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="form-field">
+                <label for="note">Note</label>
+                <textarea id="note" name="note" rows="4" maxlength="2000"
+                          placeholder="Diagnostic, action réalisée, information demandée…"></textarea>
+              </div>
+              <button type="submit" class="btn-orange btn-block">Enregistrer</button>
+            </form>
+          </div>
+        {% elif peut_rouvrir %}
+          <div class="panel">
+            <h2 class="panel-title">Le problème persiste ?</h2>
+            <form method="post" action="{% url 'tickets:rouvrir' ticket.pk %}">
+              {% csrf_token %}
+              <div class="form-field">
+                <label for="note-rouvrir">Précisez ce qui ne fonctionne toujours pas</label>
+                <textarea id="note-rouvrir" name="note" rows="3" maxlength="2000"></textarea>
+              </div>
+              <button type="submit" class="btn-orange btn-block">Rouvrir le ticket</button>
+            </form>
+          </div>
+        {% endif %}
+
+        <a class="back-link" href="{% if technicien %}{% url 'tickets:technicien' %}{% else %}{% url 'tickets:liste' %}{% endif %}">&larr; Retour à la liste</a>
+      </aside>
+    </div>
+  </div>
+</section>
+{% endblock %}

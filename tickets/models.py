@@ -80,3 +80,18 @@ class TicketEvent(models.Model):
 
     def __str__(self):
         return f"Ticket {self.ticket_id} : {self.ancien_statut} → {self.nouveau_statut}"
+
+    @staticmethod
+    def _libelle(valeur):
+        try:
+            return Ticket.Statut(valeur).label
+        except ValueError:
+            return valeur
+
+    @property
+    def ancien_libelle(self):
+        return self._libelle(self.ancien_statut)
+
+    @property
+    def nouveau_libelle(self):
+        return self._libelle(self.nouveau_statut)

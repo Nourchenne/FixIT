@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}FixIT — {% if espace_technicien %}Espace technicien{% else %}Mes tickets{% endif %}{% endblock %}
+{% block nav_tickets %}{% if not espace_technicien %}active{% endif %}{% endblock %}
+{% block nav_technicien %}{% if espace_technicien %}active{% endif %}{% endblock %}
+
+{% block content %}
+<section class="hero hero-compact">
+  <div class="container">
+    {% if espace_technicien %}
+      <h1>Espace technicien</h1>
+      <p>Tous les tickets de support. Ouvrez un ticket pour le prendre en charge, ajouter une note ou changer son statut.</p>
+    {% else %}
+      <h1>Mes tickets</h1>
+      <p>Les demandes transmises à un technicien depuis l'assistant, et leur état d'avancement.</p>
+    {% endif %}
+  </div>
+</section>
+
+<section class="section app-section">
+  <div class="container">
+    <div class="panel">
+      <form method="get" class="filter-form">
+        <div class="form-field">
+          <label for="q">Rechercher (numéro ou titre)</label>
+          <input type="text" id="q" name="q" value="{{ recherche }}" placeholder="Exemple : 12 ou Wi-Fi">
+        </div>
+        <div class="form-field">
+          <label for="statut">Statut</label>
+          <select id="statut" name="statut">
+            <option value="">Tous les statuts</option>
+            {% for valeur, libelle in statuts %}
+              <option value="{{ valeur }}"{% if valeur == statut %} selected{% endif %}>{{ libelle }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <button type="submit" class="btn-orange">Filtrer</button>
+      </form>
+
+      {% if tickets %}
+        <div class="table-wrap">
+          <table class="table-fixit">
+            <thead>
+              <tr>
+                <th>N°</th>
+                <th>Titre</th>
+                {% if espace_technicien %}<th>Demandeur</th><th>Technicien</th>{% endif %}
+                <th>Catégorie</th>
+                <th>Statut</th>
+                <th>Créé le</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for ticket in tickets %}
+                <tr>
+                  <td><a href="{% url 'tickets:detail' ticket.pk %}">#{{ ticket.pk }}</a></td>
+                  <td><a href="{% url 'tickets:detail' ticket.pk %}">{{ ticket.titre }}</a></td>
+                  {% if espace_technicien %}
+                    <td>{{ ticket.proprietaire.get_username }}</td>
+                    <td>{{ ticket.technicien.get_username|default:"—" }}</td>
+                  {% endif %}
+                  <td>{{ ticket.get_categorie_display }}</td>
+                  <td><span class="badge badge-{{ ticket.statut }}">{{ ticket.get_statut_display }}</span></td>
+                  <td>{{ ticket.cree_le|date:"d/m/Y H:i" }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% else %}
+        <p class="empty-state">
+          Aucun ticket{% if statut or recherche %} ne correspond à ces critères{% endif %}.
+          {% if not espace_technicien and not statut and not recherche %}
+            Vous pouvez en créer un depuis <a href="{% url 'assistant:chat' %}">l'assistant</a>.
+          {% endif %}
+        </p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}
