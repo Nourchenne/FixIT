@@ -2,6 +2,7 @@ import argparse
 import json
 import logging
 import os
+import re
 import time
 from functools import lru_cache
 from pathlib import Path
@@ -27,13 +28,48 @@ SUGGESTION_TICKET = {
           "ticket so that a technician can take over.",
 }
 
+AVERTISSEMENT_DONNEES = {
+    "fr": "Attention : une réinitialisation complète (option « Supprimer tout ») "
+          "efface vos fichiers, applications et paramètres. Sauvegardez vos "
+          "données avant de commencer.",
+    "en": "Warning: a full reset (\"Remove everything\" option) erases your "
+          "files, apps and settings. Back up your data before you start.",
+}
+
+# Mots courants qui permettent de reconnaître la langue d'une question.
+MOTS_FR = set("""le la les un une des du de au aux mon ma mes ton ta tes son sa
+ses est sont et ou ne pas plus je j mon il elle nous vous ils ça ce cet
+cette que qui quoi quand comment pourquoi où sur avec pour dans sans après
+avant depuis rien aucun aucune ordinateur réseau connexion mot passe écran
+marche fonctionne trouve impossible lent lente encore toujours ai suis""".split())
+MOTS_EN = set("""the an my your his her its our is are was were and or not
+no don't doesn't can't cannot won't isn't i it we you they this that what
+which who when how why where with for in without after before since any
+anything computer laptop network connection password screen works working
+find found slow still keeps keep has have does do can will""".split())
+DEMANDE_EN = re.compile(r"\b(?:in english|answer in english|en anglais)\b", re.I)
+DEMANDE_FR = re.compile(r"\b(?:in french|en français|en francais)\b", re.I)
+
+# Étapes qui peuvent effacer les données de l'utilisateur. La réinitialisation
+# du réseau n'est pas concernée : elle ne supprime aucun fichier.
+ETAPE_RISQUEE = re.compile(
+    r"r[ée]initialis\w*\s+(?:ce|le|votre|mon|du|de\s+ce|de\s+votre)\s+"
+    r"(?:pc|ordinateur)|supprimer\s+tout|tout\s+supprimer|formater"
+    r"|reset\s+(?:this|your|the|my)\s+(?:pc|computer)|remove\s+everything"
+    r"|format(?:ting)?\s+(?:the|your)\s+(?:drive|disk)",
+    re.I,
+)
+AVERTISSEMENT_PRESENT = re.compile(
+    r"perte|perdre|perdu|effac|sauvegard|\blos[est]\b|\bloss\b|eras|back\s?up",
+    re.I,
+)
+
 CONSIGNE = """Tu es FixIT, assistant de dépannage pour PC sous Windows 11 et Wi-Fi.
 
 Langue
-- Une demande explicite de français ou d'anglais a priorité.
-- Sinon, réponds dans la langue de la question (fr ou en).
-- Si la question est trop courte pour juger, comme "Wi-Fi ?", utilise le français.
-- La langue des extraits ne détermine jamais la langue de la réponse.
+- La demande contient le champ "langue" ("fr" ou "en") : rédige la
+  clarification, le résumé et toutes les étapes dans cette langue, même si les
+  extraits sont dans l'autre langue, et renvoie cette valeur dans "langue".
 
 Sortie : un objet JSON avec exactement ces clés.
 - "langue" : "fr" ou "en".
@@ -60,6 +96,39 @@ Règles
 - Si les extraits manquent ou sont hors sujet, renvoie "etapes" vide."""
 
 
+def detecter_langue(texte):
+    """Langue d'un texte : "fr", "en", ou None si on ne peut pas trancher."""
+    if DEMANDE_EN.search(texte):
+        return "en"
+    if DEMANDE_FR.search(texte):
+        return "fr"
+    mots = re.findall(r"[a-zàâçéèêëîïôûùüÿœ']+", texte.lower())
+    mots = [m.strip("'") for m in mots]
+    fr = sum(m in MOTS_FR for m in mots) + len(re.findall(r"[àâçéèêëîïôûùœ]", texte.lower()))
+    en = sum(m in MOTS_EN for m in mots)
+    if fr > en:
+        return "fr"
+    if en > fr:
+        return "en"
+    return None
+
+
+def langue_question(question):
+    """Langue imposée à la réponse ; le français si la question est trop courte."""
+    return detecter_langue(question) or "fr"
+
+
+def texte_redige(donnees):
+    """Texte écrit par le modèle, pour vérifier sa langue."""
+    if not isinstance(donnees, dict):
+        return ""
+    morceaux = [donnees.get("clarification"), donnees.get("resume")]
+    etapes = donnees.get("etapes")
+    if isinstance(etapes, list):
+        morceaux += [e.get("texte") for e in etapes if isinstance(e, dict)]
+    return " ".join(m for m in morceaux if isinstance(m, str))
+
+
 def _resultat(langue, type_reponse, answer, sources=None, ticket=False):
     """Format unique renvoyé par le service, la vue Django et la ligne de commande."""
     return {
@@ -71,9 +140,15 @@ def _resultat(langue, type_reponse, answer, sources=None, ticket=False):
     }
 
 
-def formater_reponse(donnees, passages):
-    """Transformer le JSON du modèle en réponse affichable et vérifiée."""
-    langue = donnees.get("langue") if isinstance(donnees, dict) else None
+def formater_reponse(donnees, passages, langue=None):
+    """Transformer le JSON du modèle en réponse affichable et vérifiée.
+
+    `langue` est celle décidée à partir de la question ; sans elle, on garde
+    celle renvoyée par le modèle.
+    """
+    if not isinstance(donnees, dict):
+        raise ValueError("Réponse invalide / Invalid response.")
+    langue = langue or donnees.get("langue")
     if langue not in ("fr", "en"):
         raise ValueError("Langue invalide / Invalid response language.")
 
@@ -100,7 +175,8 @@ def formater_reponse(donnees, passages):
         if not isinstance(texte, str) or not texte.strip():
             return repli
         meta = passages[numero - 1]["metadata"]
-        lignes.append(f"{len(lignes) + 1}. {texte.strip()} [S{numero}]")
+        texte = " ".join(texte.split())   # une étape = une seule ligne
+        lignes.append(f"{len(lignes) + 1}. {texte} [S{numero}]")
         sources[numero] = {
             "ref": f"S{numero}", "doc_id": meta["doc_id"],
             "titre": meta.get("titre") or meta["fichier"],
@@ -109,6 +185,11 @@ def formater_reponse(donnees, passages):
 
     resume = donnees.get("resume")
     entete = [resume.strip()] if isinstance(resume, str) and resume.strip() else []
+    # Chaque étape risquée doit contenir elle-même son avertissement : un mot
+    # comme « perdues » ailleurs dans la réponse ne suffit pas.
+    if any(ETAPE_RISQUEE.search(l) and not AVERTISSEMENT_PRESENT.search(l)
+           for l in lignes):
+        entete.append(AVERTISSEMENT_DONNEES[langue])
     return _resultat(langue, "etapes", "\n".join(entete + lignes + pied),
                      list(sources.values()), ticket)
 
@@ -125,6 +206,18 @@ def get_modele():
     ).bind(response_format={"type": "json_object"})
 
 
+def _generer(modele, demande, rappel=None):
+    """Un appel au modèle ; renvoie le JSON décodé."""
+    messages = [("system", CONSIGNE), ("human", demande)]
+    if rappel:
+        messages.append(("human", rappel))
+    message = modele.invoke(messages)
+    try:
+        return json.loads(message.content)
+    except (TypeError, json.JSONDecodeError) as erreur:
+        raise ValueError("Réponse Groq illisible. Réessaie.") from erreur
+
+
 def answer_question(question):
     if not isinstance(question, str) or not question.strip():
         raise ValueError("Saisis une question / Enter a question.")
@@ -134,23 +227,28 @@ def answer_question(question):
     passages = search_documents(question.strip(), limit=3)
     recherche = time.perf_counter()
 
+    langue = langue_question(question)
     contexte = [
         {"numero": i, "extrait": p["page_content"]}
         for i, p in enumerate(passages, start=1)
     ]
     demande = json.dumps(
-        {"question": question, "extraits": contexte}, ensure_ascii=False
+        {"question": question, "langue": langue, "extraits": contexte},
+        ensure_ascii=False,
     )
-    message = modele.invoke([("system", CONSIGNE), ("human", demande)])
+    donnees = _generer(modele, demande)
+    ecrite = detecter_langue(texte_redige(donnees))
+    if ecrite and ecrite != langue:
+        # Réponse rédigée dans l'autre langue : un seul nouvel essai.
+        logger.info("FixIT : réponse en %s au lieu de %s, nouvel essai",
+                    ecrite, langue)
+        rappel = {"fr": "Rédige toute la réponse en français.",
+                  "en": "Write the whole answer in English."}[langue]
+        donnees = _generer(modele, demande, rappel)
     fin = time.perf_counter()
     logger.info("FixIT : recherche %.0f ms, génération %.0f ms",
                 (recherche - debut) * 1000, (fin - recherche) * 1000)
-
-    try:
-        donnees = json.loads(message.content)
-    except (TypeError, json.JSONDecodeError) as erreur:
-        raise ValueError("Réponse Groq illisible. Réessaie.") from erreur
-    return formater_reponse(donnees, passages)
+    return formater_reponse(donnees, passages, langue)
 
 
 if __name__ == "__main__":
