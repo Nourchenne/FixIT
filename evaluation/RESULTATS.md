@@ -141,6 +141,74 @@ Piste d'amélioration pour les échecs restants : enrichir les métadonnées des
 guides (mots-clés anglais, synonymes familiers) plutôt que changer de méthode
 de recherche.
 
+## Évaluation de la génération
+
+Les mesures précédentes jugent uniquement la recherche (le bon guide est-il
+retrouvé ?). Elles ne disent rien de la réponse elle-même : le modèle peut
+retrouver le bon passage et quand même ajouter une étape qu'il n'y a pas lu.
+`evaluation/evaluate_generation.py` complète donc le benchmark avec deux
+mesures de la génération, jugées par Ragas et un modèle plus gros que celui
+qui répond (`openai/gpt-oss-120b` contre `openai/gpt-oss-20b`) :
+
+- **faithfulness** : chaque affirmation de la réponse est-elle appuyée par les
+  passages réellement envoyés au modèle ? (détecte l'invention de détails) ;
+- **answer_relevancy** : la réponse répond-elle à la question posée ?
+
+`questions_final.jsonl` ne contient pas de réponse de référence rédigée à la
+main (seulement des `gold_doc_ids`) : les métriques qui en ont besoin
+(`context_recall`, `factual_correctness`) ne sont donc pas mesurées ici — le
+Recall@k et le MRR@10 ci-dessus couvrent déjà, avec les `gold_doc_ids`, la
+question « les bons passages sont-ils trouvés ? ».
+
+### Résultats
+
+Sur les 15 premières questions répondables de `questions_final.jsonl`
+(pipeline complet : recherche dense, filtre par marque, génération réelle) :
+
+| Mesure | Score moyen | Questions exploitables |
+|---|---|---|
+| faithfulness | 0,557 | 14 / 15 (un appel au juge a expiré, compte gratuit Groq) |
+| answer_relevancy | 0,891 | 15 / 15 |
+
+Détail par question : `evaluation/results/generation_20261126_220439.csv`.
+
+### Lecture
+
+`answer_relevancy` est solide : les réponses adressent bien la question
+posée, dans les deux langues.
+
+`faithfulness` est plus bas et c'est informatif plutôt qu'alarmant. Deux cas
+distincts, à ne pas confondre :
+
+- **F002 et F007 sont des échecs de recherche déjà connus** (section
+  « Échecs communs » ci-dessus) : le bon guide n'est jamais retrouvé. F007
+  reçoit donc le repli (« Les guides disponibles ne suffisent pas pour
+  répondre »), ce qui est le comportement attendu — faithfulness vaut 0 sans
+  que le modèle ait inventé quoi que ce soit. F002 a expiré côté juge avant
+  d'avoir un score.
+- **F001 et F003 sont des échecs de génération, pas de recherche** : le bon
+  guide est bien retrouvé (F003 : Recall@5 = 1,0), mais la réponse ajoute des
+  détails précis absents du passage cité — par exemple, pour F003 (« Le
+  processeur de mon PC est constamment à 100 % »), l'étape 1 recommande une
+  analyse Windows Defender que le passage [S1] ne mentionne pas forcément en
+  ces termes. Le modèle complète avec des connaissances générales plutôt que
+  de s'en tenir strictement au guide cité.
+
+C'est le genre d'écart qu'aucune mesure de retrieval ne peut détecter : les
+bons documents sont là, c'est la rédaction qui déborde du contenu fourni.
+
+### Limites de cette mesure
+
+- Échantillon de 15 questions sur 40 répondables (pas les 40 : chaque
+  question coûte plusieurs appels Groq, et le compte gratuit limite les
+  tokens par minute — voir `--n` dans la commande ci-dessous).
+- Un appel a expiré pendant le jugement (TimeoutError, absorbé par le
+  réessai intégré de Ragas pour les 29 autres, mais pas pour celui-là) :
+  faithfulness n'a donc que 14 valeurs sur 15.
+- Pas de mesure de factualité contre une réponse de référence (voir
+  ci-dessus) : seule la fidélité aux passages fournis est vérifiée, pas
+  l'exactitude technique absolue de chaque étape.
+
 ## Reproduire les mesures
 
 Depuis la racine du dépôt, environnement activé et Qdrant démarré :
@@ -152,8 +220,15 @@ python -m evaluation.evaluate_retrieval --questions evaluation/questions_final.j
 python -m evaluation.evaluate_retrieval --questions evaluation/questions_final.jsonl --mode hybride
 python -m evaluation.evaluate_retrieval --questions evaluation/questions_final.jsonl --mode dense --rerank --candidates 10
 python -m evaluation.evaluate_retrieval --questions evaluation/questions_final.jsonl --mode hybride --rerank --candidates 10
+
+python -m evaluation.evaluate_generation --n 15
 ```
 
 La première commande n'est nécessaire qu'une fois (ou après une réindexation).
 Les scores affichés pour l'hybride sont des scores RRF : ils ne se comparent pas
 aux scores cosinus du dense, seul le classement se compare.
+
+`evaluate_generation.py` demande `GROQ_API_KEY` dans `.env` et consomme du
+quota Groq à chaque question (génération + jugement) ; augmenter `--n`
+jusqu'à 40 donne une mesure plus large mais prend plus longtemps sur le
+compte gratuit.
