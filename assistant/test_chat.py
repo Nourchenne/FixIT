@@ -1,3 +1,4 @@
+import json
 import unittest
 from unittest.mock import patch
 
@@ -217,3 +218,58 @@ class AvertissementTests(unittest.TestCase):
         lignes = self.formater("fr", "Le Wi-Fi ne fonctionne plus.",
                                "Lancez la réinitialisation du réseau.")
         self.assertNotIn(chat.AVERTISSEMENT_DONNEES["fr"], lignes)
+
+
+class MarqueTests(unittest.TestCase):
+    """Un guide propre à une marque n'est proposé que si la question la
+    mentionne (ex. ne pas montrer un guide Dell à une question générique)."""
+
+    def setUp(self):
+        patcher = patch.object(chat, "marques_connues", return_value={"Dell", "HP"})
+        patcher.start()
+        self.addCleanup(patcher.stop)
+        self.generique = {"page_content": "x", "metadata": {
+            "doc_id": "DOC001", "titre": "Guide Wi-Fi générique", "page": 8,
+            "source_url": "https://example.org/wifi", "marque": ""}}
+        self.dell = {"page_content": "y", "metadata": {
+            "doc_id": "DOC003", "titre": "Guide Wi-Fi Dell", "page": 3,
+            "source_url": "https://example.org/dell", "marque": "Dell"}}
+
+    def test_marque_mentionnee_dans_la_question(self):
+        self.assertEqual(chat.marque_demandee("Mon PC Dell ne trouve pas de Wi-Fi."), "Dell")
+        self.assertIsNone(chat.marque_demandee("Mon PC ne trouve pas de Wi-Fi."))
+
+    def test_detection_insensible_a_la_casse(self):
+        self.assertEqual(chat.marque_demandee("mon ordinateur dell rame"), "Dell")
+
+    def test_guide_de_marque_ecarte_si_non_demande(self):
+        resultat = chat.filtrer_par_marque([self.generique, self.dell],
+                                           "Mon ordinateur ne trouve aucun réseau Wi-Fi.")
+        self.assertEqual(resultat, [self.generique])
+
+    def test_guide_de_marque_garde_si_demande(self):
+        resultat = chat.filtrer_par_marque([self.generique, self.dell],
+                                           "Mon PC Dell ne trouve aucun réseau Wi-Fi.")
+        self.assertEqual(resultat, [self.generique, self.dell])
+
+    def test_aucun_guide_generique_on_garde_quand_meme_la_marque(self):
+        # Mieux vaut un guide de marque non demandée que pas de réponse.
+        resultat = chat.filtrer_par_marque([self.dell], "Mon ordinateur ne trouve aucun réseau Wi-Fi.")
+        self.assertEqual(resultat, [self.dell])
+
+    @patch.dict("os.environ", {"GROQ_API_KEY": "test", "GROQ_MODEL": "test"})
+    @patch.object(chat, "ChatGroq")
+    @patch.object(chat, "search_documents")
+    def test_reponse_n_utilise_pas_le_guide_de_marque_non_demande(self, recherche, modele):
+        recherche.return_value = [self.dell, self.generique]
+        chat.get_modele.cache_clear()
+        self.addCleanup(chat.get_modele.cache_clear)
+        appel = modele.return_value.bind.return_value.invoke
+        appel.return_value.content = (
+            '{"langue":"fr","etapes":[{"texte":"Activez le Wi-Fi.","source":1}]}')
+
+        chat.answer_question("Mon ordinateur ne trouve aucun réseau Wi-Fi.")
+
+        demande = json.loads(appel.call_args.args[0][1][1])
+        extraits = [e["extrait"] for e in demande["extraits"]]
+        self.assertEqual(extraits, ["x"])  # seul le passage générique est envoyé

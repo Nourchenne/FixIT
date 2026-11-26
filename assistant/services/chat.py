@@ -11,11 +11,17 @@ from dotenv import load_dotenv
 from langchain_groq import ChatGroq
 
 from assistant.services.retrieval import search_documents
+from documents.services.ingesting import load_sources
 
 
 logger = logging.getLogger(__name__)
 
 BASE_DIR = Path(__file__).resolve().parents[2]
+
+# Nombre de passages demandés à la recherche avant le filtrage par marque,
+# et nombre de passages réellement envoyés au modèle après filtrage.
+CANDIDATS_RECHERCHE = 10
+LIMITE_SOURCES = 3
 
 REFUS = {
     "fr": "Les guides disponibles ne suffisent pas pour répondre.",
@@ -218,13 +224,47 @@ def _generer(modele, demande, rappel=None):
         raise ValueError("Réponse Groq illisible. Réessaie.") from erreur
 
 
+@lru_cache(maxsize=1)
+def marques_connues():
+    """Marques présentes dans le corpus (data/sources.csv), pour savoir
+    si une question vise un appareil précis."""
+    return {s["marque"] for s in load_sources() if s.get("marque")}
+
+
+def marque_demandee(question):
+    """Marque mentionnée explicitement dans la question, sinon None."""
+    texte = question.lower()
+    for marque in marques_connues():
+        if marque.lower() in texte:
+            return marque
+    return None
+
+
+def filtrer_par_marque(passages, question):
+    """Écarter les passages propres à une marque que la question ne
+    mentionne pas (ex. ne pas proposer un guide Dell/SupportAssist à une
+    question générique sur le Wi-Fi).
+
+    Si le filtrage ne laisse plus aucun passage, on garde la liste
+    d'origine : un guide de marque non demandée vaut mieux qu'une absence
+    de réponse.
+    """
+    marque = marque_demandee(question)
+    filtres = [
+        p for p in passages
+        if not p["metadata"].get("marque") or p["metadata"]["marque"] == marque
+    ]
+    return filtres or passages
+
+
 def answer_question(question):
     if not isinstance(question, str) or not question.strip():
         raise ValueError("Saisis une question / Enter a question.")
     modele = get_modele()
 
     debut = time.perf_counter()
-    passages = search_documents(question.strip(), limit=3)
+    passages = search_documents(question.strip(), limit=CANDIDATS_RECHERCHE)
+    passages = filtrer_par_marque(passages, question)[:LIMITE_SOURCES]
     recherche = time.perf_counter()
 
     langue = langue_question(question)
